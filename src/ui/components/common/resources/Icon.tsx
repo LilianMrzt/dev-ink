@@ -4,7 +4,7 @@ import { IconProps } from '@interfaces/ui/components/common/resources/IconProps'
 
 const Icon: FC<IconProps> = ({
     children,
-    size = 24,
+    size = 16,
     color,
     backgroundColor,
     padding

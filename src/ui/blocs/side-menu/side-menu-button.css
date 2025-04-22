@@ -1,0 +1,11 @@
+.side-menu-button {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+}
