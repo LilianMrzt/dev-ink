@@ -1,0 +1,21 @@
+.resizable-drawer {
+    height: calc(100vh - 50px);
+    min-width: 200px;
+    max-width: 600px;
+    background-color: var(--primary);
+    border-right: 1px solid var(--secondary);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.resizable-drawer-handle {
+    width: 6px;
+    cursor: ew-resize;
+    position: absolute;
+    top: 0;
+    right: -3px;
+    height: 100%;
+    background-color: transparent;
+    z-index: 10;
+}

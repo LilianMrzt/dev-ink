@@ -1,3 +1,8 @@
+.side-menu-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 .side-menu {
     width: 49px;
     height: calc(100vh - 50px);
