@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { TextProps } from '@interfaces/ui/components/common/TextProps'
+import { TextProps } from '@interfaces/ui/components/common/text/TextProps'
 import './text.css'
 import { useTheme } from '@hooks/ThemeContext'
 
