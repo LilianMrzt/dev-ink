@@ -1,0 +1,6 @@
+.side-menu {
+    width: 19px;
+    height: calc(100vh - 50px);
+    background-color: var(--primary);
+    border-right: 1px solid var(--secondary);
+}

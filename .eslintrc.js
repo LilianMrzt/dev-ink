@@ -35,6 +35,7 @@ module.exports = {
         'react/prop-types': 'off',
         'object-curly-spacing': ['error', 'always'],
         'quotes': ['error', 'single', { avoidEscape: true }],
+        'semi': ['error', 'never'],
     },
     overrides: [
         {
@@ -44,4 +45,4 @@ module.exports = {
             },
         },
     ],
-};
+}

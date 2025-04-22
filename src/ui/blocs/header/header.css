@@ -1,0 +1,6 @@
+.header {
+    height: 29px;
+    width: 100vw;
+    background-color: var(--primary);
+    border-bottom: 1px solid var(--secondary);
+}

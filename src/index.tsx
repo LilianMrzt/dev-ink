@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { ThemeProvider } from '@hooks/ThemeContext';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import App from './App'
+import { ThemeProvider } from '@hooks/ThemeContext'
 
 const root = ReactDOM.createRoot(
     document.getElementById('root')!
@@ -14,4 +14,4 @@ root.render(
             <App />
         </ThemeProvider>
     </React.StrictMode>
-);
+)
