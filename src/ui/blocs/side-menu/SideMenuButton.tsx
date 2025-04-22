@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
-import Icon from '@components/common/resources/Icon'
+import Icon from '@components/resources/Icon'
 import './side-menu-button.css'
 import { useTheme } from '@hooks/ThemeContext'
-import { SideMenuButtonProps } from '@interfaces/ui/components/blocs/side-menu/SideMenuButtonProps'
+import { SideMenuButtonProps } from '@interfaces/ui/blocs/side-menu/SideMenuButtonProps'
 import { darkenOrLightenColor } from '@utils/ColorUtils'
 
 const SideMenuButton: FC<SideMenuButtonProps> = ({

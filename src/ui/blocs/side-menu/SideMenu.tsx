@@ -3,7 +3,7 @@ import './side-menu.css'
 import SideMenuButton from '@ui/blocs/side-menu/SideMenuButton'
 import { FolderOpenIcon, GitBranchIcon } from '@resources/Icons'
 import ResizableDrawer from '@ui/blocs/side-menu/ResizableDrawer'
-import Text from '@components/common/text/Text'
+import Text from '@components/text/Text'
 
 const SideMenu = () => {
     const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false)

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import './resizable-drawer.css'
-import { ResizableDrawerProps } from '@interfaces/ui/components/blocs/side-menu/ResizableDrawerProps'
+import { ResizableDrawerProps } from '@interfaces/ui/blocs/side-menu/ResizableDrawerProps'
 
 const MIN_WIDTH = 200
 const MAX_WIDTH = 600
