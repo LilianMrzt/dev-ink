@@ -5,9 +5,18 @@ import SideMenu from '@ui/blocs/side-menu/SideMenu'
 import BottomMenu from '@ui/blocs/bottom-menu/BottomMenu'
 
 const App = (): ReactNode => (
-    <div className="App">
+    <div
+        className={'app'}
+    >
         <Header/>
-        <SideMenu/>
+        <main
+            className={'main'}
+        >
+            <SideMenu/>
+            <p>
+                Test
+            </p>
+        </main>
         <BottomMenu/>
     </div>
 )
