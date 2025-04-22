@@ -18,8 +18,7 @@ module.exports = {
     plugins: [
         '@typescript-eslint',
         'react',
-        'react-hooks',
-        'unused-imports'
+        'react-hooks'
     ],
     extends: [
         'eslint:recommended',
