@@ -7,10 +7,15 @@ import { darkenOrLightenColor } from '@utils/ColorUtils'
 
 const SideMenuButton: FC<SideMenuButtonProps> = ({
     children,
-    onClick
+    onClick,
+    isSelected
 }) => {
     const  { theme } = useTheme()
     const [isHovered, setIsHovered] = useState(false)
+
+    const backgroundColor = isSelected
+        ? isHovered ? darkenOrLightenColor(theme.background, 'lighten') :  darkenOrLightenColor(theme.background, 'lighten', 5)
+        : isHovered ? darkenOrLightenColor(theme.background, 'lighten') : theme.background
 
     return (
         <button
@@ -19,7 +24,7 @@ const SideMenuButton: FC<SideMenuButtonProps> = ({
             onMouseEnter={() => { setIsHovered(true)}}
             onMouseLeave={() => { setIsHovered(false)}}
             style={{
-                backgroundColor: isHovered ? darkenOrLightenColor(theme.background, 'lighten') : theme.background
+                backgroundColor: backgroundColor
             }}
         >
             <Icon

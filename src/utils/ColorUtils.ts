@@ -24,13 +24,15 @@ export const hexToRgb = (hex: string): { r: number, g: number, b: number } | nul
  * Fonction pour assombrir une couleur rgb
  * @param hex
  * @param mode
+ * @param percentageValue
  */
 export const darkenOrLightenColor = (
     hex: string,
-    mode: 'lighten' | 'darken'
+    mode: 'lighten' | 'darken',
+    percentageValue = 10
 ): string => {
     const rgbHex = hexToRgb(hex)
-    const percentage = 10
+    const percentage = percentageValue
     if (!rgbHex) return hex
 
     const adjust = (channel: number): number => {

@@ -51,6 +51,7 @@ const SideMenu = () => {
                 className={'side-menu'}
             >
                 <SideMenuButton
+                    isSelected={isProjectDrawerOpen}
                     onClick={() => {
                         toggleProjectDrawer()
                     }}
@@ -58,6 +59,7 @@ const SideMenu = () => {
                     <FolderOpenIcon/>
                 </SideMenuButton>
                 <SideMenuButton
+                    isSelected={isGitDrawerOpen}
                     onClick={() => {
                         toggleGitDrawer()
                     }}

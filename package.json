@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
+    "@types/electron": "^1.6.12",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
