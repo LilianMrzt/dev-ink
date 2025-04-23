@@ -7,3 +7,9 @@
     display: flex;
     overflow: hidden;
 }
+
+.editor-layer {
+    position: relative;
+    flex: 1;
+    display: flex;
+}

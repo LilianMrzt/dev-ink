@@ -2,7 +2,6 @@
     flex: 1;
     height: 100%;
     background: transparent;
-    color: var(--text);
     caret-color: var(--text);
     font-family: inherit;
     font-size: 14px;
@@ -15,4 +14,5 @@
     padding: 4px;
     box-sizing: border-box;
     overflow: auto;
+    color: transparent;
 }
