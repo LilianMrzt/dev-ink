@@ -1,0 +1,11 @@
+.editor-wrapper {
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.editor-button-row {
+    display: flex;
+    background-color: var(--secondary);
+}
