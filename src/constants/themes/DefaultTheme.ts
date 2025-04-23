@@ -4,5 +4,5 @@ export const DefaultTheme = {
     tertiary: '#a58fff',
     background: '#3c3f41',
     text: '#FFFFFF',
-    outline: '#505051',
+    outline: '#505051'
 }

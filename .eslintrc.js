@@ -3,17 +3,17 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
-        ecmaFeatures: { jsx: true },
+        ecmaFeatures: { jsx: true }
     },
     settings: {
         react: {
-            version: 'detect',
-        },
+            version: 'detect'
+        }
     },
     env: {
         browser: true,
         es2021: true,
-        node: true,
+        node: true
     },
     plugins: [
         '@typescript-eslint',
@@ -23,7 +23,7 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:react/recommended',
-        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended'
     ],
     rules: {
         '@typescript-eslint/ban-ts-comment': 'off',
@@ -36,13 +36,20 @@ module.exports = {
         'object-curly-spacing': ['error', 'always'],
         'quotes': ['error', 'single', { avoidEscape: true }],
         'semi': ['error', 'never'],
+        'arrow-body-style': ['error', 'always'],
+        'comma-dangle': ['error', 'never'],
+        'space-infix-ops': 'error',
+        'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0, maxBOF: 0 }],
+        'arrow-spacing': ['error', { before: true, after: true }],
+        'brace-style': ['error', '1tbs', { allowSingleLine: false }],
+        'space-before-blocks': ['error', { functions: 'never', keywords: 'always', classes: 'always' }]
     },
     overrides: [
         {
             files: ['*.ts', '*.tsx'],
             rules: {
-                indent: ['error', 4],
-            },
-        },
-    ],
+                indent: ['error', 4]
+            }
+        }
+    ]
 }

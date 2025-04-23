@@ -21,8 +21,12 @@ const SideMenuButton: FC<SideMenuButtonProps> = ({
         <button
             className={'side-menu-button'}
             onClick={onClick}
-            onMouseEnter={() => { setIsHovered(true)}}
-            onMouseLeave={() => { setIsHovered(false)}}
+            onMouseEnter={() => {
+                setIsHovered(true)
+            }}
+            onMouseLeave={() => {
+                setIsHovered(false)
+            }}
             style={{
                 backgroundColor: backgroundColor
             }}

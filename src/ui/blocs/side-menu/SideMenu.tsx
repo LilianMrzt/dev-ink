@@ -41,8 +41,6 @@ const SideMenu = () => {
         closeProjectDrawer()
     }
 
-
-
     return (
         <div
             className={'side-menu-wrapper'}
