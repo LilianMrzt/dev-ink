@@ -1,17 +1,32 @@
 .editor-window {
     height: 100%;
     width: 100%;
-    flex: 1;
     font-family: monospace;
-    background: var(--secondary);
+    background-color: var(--background);
     color: var(--text);
-    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.editor-lines {
+    width: 60px;
+    background-color: var(--secondary);
+    color: var(--textSecondary);
+    text-align: right;
+    padding: 4px;
+    user-select: none;
+    line-height: 1.5;
+    font-size: 14px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.editor-line-number {
+    height: 1.5em;
 }
 
 .editor-window-textarea {
-    position: absolute;
-    inset: 0;
-    width: 100%;
+    flex: 1;
     height: 100%;
     background: transparent;
     color: var(--text);
@@ -24,5 +39,7 @@
     outline: none;
     z-index: 2;
     white-space: pre;
+    padding: 4px;
+    box-sizing: border-box;
+    overflow: auto;
 }
-
