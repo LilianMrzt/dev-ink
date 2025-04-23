@@ -1,0 +1,16 @@
+.editor-lines {
+    width: 60px;
+    background-color: var(--secondary);
+    color: var(--textSecondary);
+    text-align: right;
+    padding: 4px;
+    user-select: none;
+    line-height: 1.5;
+    font-size: 14px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.editor-line-number {
+    height: 1.5em;
+}

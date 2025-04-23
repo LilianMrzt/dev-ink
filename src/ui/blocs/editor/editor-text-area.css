@@ -1,0 +1,18 @@
+.editor-text-area {
+    flex: 1;
+    height: 100%;
+    background: transparent;
+    color: var(--text);
+    caret-color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    border: none;
+    outline: none;
+    z-index: 2;
+    white-space: pre;
+    padding: 4px;
+    box-sizing: border-box;
+    overflow: auto;
+}
