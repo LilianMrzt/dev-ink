@@ -1,13 +1,17 @@
 import { KeyboardEvent } from 'react'
+import { pushHistory, snapshot } from '@utils/editorHistory'
+import { HistoryState } from '@interfaces/types/History'
 
 /**
  * Gestion de la tabulation
+ *
  * @param e
  * @param code
  * @param textarea
  * @param setCode
  * @param onChange
  * @param fixtureId
+ * @param history
  */
 export const handleTab = (
     e: KeyboardEvent<HTMLTextAreaElement>,
@@ -15,7 +19,8 @@ export const handleTab = (
     textarea: HTMLTextAreaElement,
     setCode: (code: string) => void,
     onChange: (id: string, value: string) => void,
-    fixtureId: string
+    fixtureId: string,
+    history: HistoryState
 ) => {
     e.preventDefault()
 
@@ -25,6 +30,9 @@ export const handleTab = (
     const tab = '\t'
 
     const newValue = before + tab + after
+
+    pushHistory(history, snapshot(code, selectionStart, 'tab'))
+
     setCode(newValue)
     onChange(fixtureId, newValue)
 

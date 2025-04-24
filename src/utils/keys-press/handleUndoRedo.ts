@@ -1,6 +1,6 @@
 import { KeyboardEvent } from 'react'
 import { redo, undo } from '@utils/editorHistory'
-import { HistoryState } from '@interfaces/types/History'
+import { EditType, HistoryState } from '@interfaces/types/History'
 
 /**
  * Gestion du undo/redo+
@@ -31,7 +31,9 @@ export const handleUndoRedo = (
 
     const currentSnapshot = {
         code,
-        cursor: textarea.selectionStart
+        cursor: textarea.selectionStart,
+        type: 'manual' as EditType,
+        timestamp: Date.now()
     }
 
     const newSnapshot = isUndo

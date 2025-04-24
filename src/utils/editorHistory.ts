@@ -1,4 +1,4 @@
-import { HistorySnapshot, HistoryState } from '@interfaces/types/History'
+import { EditType, HistorySnapshot, HistoryState } from '@interfaces/types/History'
 
 /**
  * Initialise un nouvel historique d'édition vide.
@@ -21,7 +21,9 @@ export const pushHistory = (
     snapshot: HistorySnapshot
 ) => {
     const last = history.past[history.past.length - 1]
-    if (last?.code === snapshot.code) return
+    if (last && snapshot.type === last.type && snapshot.timestamp - last.timestamp < 300) {
+        return
+    }
 
     history.past.push(snapshot)
     history.future = []
@@ -53,4 +55,24 @@ export const redo = (history: HistoryState): HistorySnapshot | null => {
     const next = history.future.shift()!
     history.past.push(next)
     return next
+}
+
+/**
+ * Génère une capture de l’état actuel de l’éditeur pour l’historique.
+ *
+ * @param code
+ * @param cursor
+ * @param type
+ */
+export const snapshot = (
+    code: string,
+    cursor: number,
+    type: EditType
+): HistorySnapshot => {
+    return {
+        code,
+        cursor,
+        type,
+        timestamp: Date.now()
+    }
 }

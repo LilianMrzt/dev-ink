@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useEffect, useRef } from 'react'
 import './editor-text-area.css'
 import { EditorTextAreaProps } from '@interfaces/ui/blocs/editor/EditorTextAreaProps'
 import { handleEditorKeyDown } from '@utils/keys-press/handleEditorKeyDown'
-import { createHistory, pushHistory } from '@utils/editorHistory'
+import { createHistory, pushHistory, snapshot } from '@utils/editorHistory'
 import { HistoryState } from '@interfaces/types/History'
 
 const EditorTextArea: FC<EditorTextAreaProps> = ({
@@ -29,10 +29,11 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
 
         if (textareaRef.current) {
             if ('selectionStart' in textareaRef.current) {
-                pushHistory(historyRef.current, {
-                    code,
-                    cursor: textareaRef.current.selectionStart
-                })
+                const cursor = textareaRef.current.selectionStart
+                pushHistory(
+                    historyRef.current,
+                    snapshot(code, cursor, 'insert')
+                )
             }
         }
 

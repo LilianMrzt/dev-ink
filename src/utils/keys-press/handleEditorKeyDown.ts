@@ -39,12 +39,12 @@ export const handleEditorKeyDown = (
 
     if (e.shiftKey && e.key === 'Tab') {
         e.preventDefault()
-        handleShiftTab(e, code, textarea, setCode, onChange, fixtureId)
+        handleShiftTab(e, code, textarea, setCode, onChange, fixtureId, history)
         return
     }
 
     if (e.key === 'Tab') {
-        handleTab(e, code, textarea, setCode, onChange, fixtureId)
+        handleTab(e, code, textarea, setCode, onChange, fixtureId, history)
         return
     }
 
