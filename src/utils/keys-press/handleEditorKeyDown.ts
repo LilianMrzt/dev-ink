@@ -32,6 +32,11 @@ export const handleEditorKeyDown = (
         return
     }
 
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault()
+        return
+    }
+
     if (e.shiftKey && e.key === 'Tab') {
         e.preventDefault()
         handleShiftTab(e, code, textarea, setCode, onChange, fixtureId)
