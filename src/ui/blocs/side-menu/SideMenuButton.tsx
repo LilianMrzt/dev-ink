@@ -10,11 +10,11 @@ const SideMenuButton: FC<SideMenuButtonProps> = ({
     onClick,
     isSelected
 }) => {
-    const  { theme } = useTheme()
+    const { theme } = useTheme()
     const [isHovered, setIsHovered] = useState(false)
 
     const backgroundColor = isSelected
-        ? isHovered ? darkenOrLightenColor(theme.primary, 'lighten') :  darkenOrLightenColor(theme.primary, 'lighten', 5)
+        ? isHovered ? darkenOrLightenColor(theme.primary, 'lighten') : darkenOrLightenColor(theme.primary, 'lighten', 5)
         : isHovered ? darkenOrLightenColor(theme.primary, 'lighten') : theme.primary
 
     return (

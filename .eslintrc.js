@@ -42,6 +42,7 @@ module.exports = {
         'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0, maxBOF: 0 }],
         'arrow-spacing': ['error', { before: true, after: true }],
         'brace-style': ['error', '1tbs', { allowSingleLine: false }],
+        'no-multi-spaces': ['error'],
         'space-before-blocks': ['error', { functions: 'never', keywords: 'always', classes: 'always' }]
     },
     overrides: [

@@ -1,15 +1,15 @@
 // @ts-ignore
-import CracoAlias from "craco-alias";
+import CracoAlias from 'craco-alias'
 
 module.exports = {
     plugins: [
         {
             plugin: CracoAlias,
             options: {
-                source: "tsconfig",
-                baseUrl: "./src",
-                tsConfigPath: "./tsconfig.paths.json",
-            },
-        },
-    ],
-};
+                source: 'tsconfig',
+                baseUrl: './src',
+                tsConfigPath: './tsconfig.paths.json'
+            }
+        }
+    ]
+}
