@@ -18,3 +18,21 @@
     display: block;
     text-align: left;
 }
+
+.token-keyword {
+    color: #be7132;
+    font-weight: bold;
+}
+
+.token-string {
+    color: #609354;
+}
+
+.token-comment {
+    color: #6d6d6d;
+    font-style: italic;
+}
+
+.token-identifier {
+    color: white;
+}
