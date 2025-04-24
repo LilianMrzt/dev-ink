@@ -16,7 +16,7 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
 
     return (
         <button
-            className={'editor-file-button'}
+            className={`editor-file-button ${isSelected ? 'active' : ''}`}
             onClick={() => {
                 return setActiveId(fix.id)
             }}
@@ -25,7 +25,7 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
             }}
         >
             <Text
-                fontSize={12}
+                fontSize={13}
             >
                 {fix.name}
             </Text>

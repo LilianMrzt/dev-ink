@@ -1,5 +1,11 @@
 .editor-file-button {
     border: none;
-    height: 20px;
     cursor: pointer;
+    padding: 4px 8px;
+    border-bottom: 2px solid var(--primary);
+    box-sizing: border-box;
+}
+
+.editor-file-button.active {
+    border-bottom: 2px solid var(--tertiary);
 }
