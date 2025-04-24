@@ -1,4 +1,4 @@
-import { KeyboardEvent } from 'react'
+import { Dispatch, KeyboardEvent, SetStateAction } from 'react'
 import { pushHistory, snapshot } from '@utils/editorHistory'
 import { HistoryState } from '@interfaces/types/History'
 
@@ -16,7 +16,7 @@ export const handleShiftTab = (
     e: KeyboardEvent<HTMLTextAreaElement>,
     code: string,
     textarea: HTMLTextAreaElement,
-    setCode: (code: string) => void,
+    setCode: Dispatch<SetStateAction<string>>,
     onChange: (id: string, value: string) => void,
     fixtureId: string,
     history: HistoryState

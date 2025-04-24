@@ -1,4 +1,4 @@
-import { KeyboardEvent } from 'react'
+import { Dispatch, KeyboardEvent, SetStateAction } from 'react'
 import { redo, undo } from '@utils/editorHistory'
 import { EditType, HistoryState } from '@interfaces/types/History'
 
@@ -18,7 +18,7 @@ export const handleUndoRedo = (
     code: string,
     history: HistoryState,
     textarea: HTMLTextAreaElement,
-    setCode: (code: string) => void,
+    setCode: Dispatch<SetStateAction<string>>,
     onChange: (id: string, value: string) => void,
     fixtureId: string
 ) => {

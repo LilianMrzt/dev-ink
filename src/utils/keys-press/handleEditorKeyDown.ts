@@ -1,10 +1,11 @@
 import { handleTab } from './handleTab'
 import { handleAutoPairing } from './handleAutoPairing'
-import { KeyboardEvent } from 'react'
+import { Dispatch, KeyboardEvent, SetStateAction } from 'react'
 import { handlePairDeletion } from '@utils/keys-press/handlePairDeletion'
 import { handleShiftTab } from '@utils/keys-press/handleShiftTab'
 import { handleUndoRedo } from '@utils/keys-press/handleUndoRedo'
 import { HistoryState } from '@interfaces/types/History'
+import { handleDuplicateLine } from '@utils/keys-press/handleDuplicateLine'
 
 /**
  * Gestion de la pression des touches du clavier
@@ -20,7 +21,7 @@ export const handleEditorKeyDown = (
     e: KeyboardEvent<HTMLTextAreaElement>,
     code: string,
     textarea: HTMLTextAreaElement | null,
-    setCode: (code: string) => void,
+    setCode: Dispatch<SetStateAction<string>>,
     onChange: (id: string, value: string) => void,
     fixtureId: string,
     history: HistoryState
@@ -34,6 +35,12 @@ export const handleEditorKeyDown = (
 
     if (e.ctrlKey && e.key === 's') {
         e.preventDefault()
+        return
+    }
+
+    if (e.ctrlKey && e.key === 'd') {
+        e.preventDefault()
+        handleDuplicateLine(textarea, code, setCode, onChange, fixtureId)
         return
     }
 

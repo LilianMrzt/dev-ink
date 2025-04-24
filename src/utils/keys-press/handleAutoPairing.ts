@@ -1,4 +1,4 @@
-import { KeyboardEvent } from 'react'
+import { Dispatch, KeyboardEvent, SetStateAction } from 'react'
 import { keyPairs } from '@constants/keys-actions/keyPairs'
 
 /**
@@ -14,7 +14,7 @@ export const handleAutoPairing = (
     e: KeyboardEvent<HTMLTextAreaElement>,
     code: string,
     textarea: HTMLTextAreaElement,
-    setCode: (code: string) => void,
+    setCode: Dispatch<SetStateAction<string>>,
     onChange: (id: string, value: string) => void,
     fixtureId: string
 ) => {
