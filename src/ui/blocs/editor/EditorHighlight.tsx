@@ -7,10 +7,7 @@ import 'prismjs/components/prism-css'
 import 'prismjs/components/prism-json'
 import 'prismjs/components/prism-markup'
 import 'prismjs/themes/prism-tomorrow.css'
-
-export interface EditorHighlightProps {
-    code: string
-}
+import { EditorHighlightProps } from '@interfaces/ui/blocs/editor/EditorHighlightProps'
 
 const EditorHighlight: FC<EditorHighlightProps> = ({ code }) => {
     // TODO: Verifier si possible sans librairie

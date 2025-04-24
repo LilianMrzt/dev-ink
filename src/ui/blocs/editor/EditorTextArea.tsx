@@ -1,14 +1,6 @@
-import React, { ChangeEvent, FC, RefObject, useEffect, useRef } from 'react'
-import { Fixture } from '@src/fixtures'
+import React, { ChangeEvent, FC, useEffect, useRef } from 'react'
 import './editor-text-area.css'
-
-export interface EditorTextAreaProps {
-    code: string
-    fixture: Fixture
-    setCode: (code: string) => void
-    linesRef: RefObject<HTMLDivElement | null>
-    onChange: (id: string, value: string) => void;
-}
+import { EditorTextAreaProps } from '@interfaces/ui/blocs/editor/EditorTextAreaProps'
 
 const EditorTextArea: FC<EditorTextAreaProps> = ({
     setCode,

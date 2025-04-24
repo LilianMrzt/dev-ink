@@ -1,10 +1,6 @@
-import React, { FC, RefObject } from 'react'
+import React, { FC } from 'react'
 import './editor-line-numbers.css'
-
-export interface EditorLineNumbersProps {
-    code: string
-    linesRef: RefObject<HTMLDivElement | null>
-}
+import { EditorLineNumbersProps } from '@interfaces/ui/blocs/editor/EditorLineNumbersProps'
 
 const EditorLineNumbers: FC<EditorLineNumbersProps> = ({
     code,
