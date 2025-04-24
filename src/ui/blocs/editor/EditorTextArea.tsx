@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FC, useEffect, useRef } from 'react'
 import './editor-text-area.css'
 import { EditorTextAreaProps } from '@interfaces/ui/blocs/editor/EditorTextAreaProps'
+import { handleEditorKeyDown } from '@utils/keys-press/handleEditorKeyDown'
 
 const EditorTextArea: FC<EditorTextAreaProps> = ({
     setCode,
@@ -37,28 +38,10 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
     }
 
     /**
-     * Intercepte la touche `Tab` pour insérer une tabulation personnalisée
-     * au lieu de changer le focus par défaut.
+     * Gestion de la pression des touches du clavier
      */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Tab') {
-            e.preventDefault()
-            const el = textareaRef.current
-            if (!el) return
-
-            const { selectionStart, selectionEnd } = el
-            const before = code.substring(0, selectionStart)
-            const after = code.substring(selectionEnd)
-            const tab = '\t'
-
-            const newValue = before + tab + after
-            setCode(newValue)
-            onChange(fixture.id, newValue)
-
-            requestAnimationFrame(() => {
-                el.selectionStart = el.selectionEnd = selectionStart + tab.length
-            })
-        }
+        handleEditorKeyDown(e, code, textareaRef.current, setCode, onChange, fixture.id)
     }
 
     return (
