@@ -6,10 +6,9 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject",
     "build:electron": "tsc -p tsconfig.electron.json",
-    "desktop": "yarn build && yarn build:electron && electron ./dist/electron.js"
+    "desktop": "yarn build && yarn build:electron && electron ./dist/electron.js",
+    "desktop:dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electronmon ./dist/electron.js\""
   },
   "dependencies": {
     "prismjs": "^1.30.0",
@@ -27,10 +26,13 @@
     "@typescript-eslint/parser": "^8.31.0",
     "concurrently": "^9.1.2",
     "craco-alias": "^3.0.1",
+    "electron": "^35.2.1",
+    "electronmon": "^2.0.3",
     "eslint": "8.56.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "wait-on": "^8.0.3"
   },
   "eslintConfig": {
     "extends": [
