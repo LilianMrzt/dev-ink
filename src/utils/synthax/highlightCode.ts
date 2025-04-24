@@ -3,11 +3,13 @@ import { tokenizeLine } from '@utils/synthax/tokenizeLine'
 /**
  * Génère du HTML syntaxiquement coloré à partir d'une chaîne de code.
  * Chaque ligne est tokenisée puis convertie en <span> avec une classe spécifique.
+ *
  * @param code
+ * @param lang
  */
-export const highlightCode = (code: string): string => {
+export const highlightCode = (code: string, lang: string): string => {
     return code.split('\n').map((line) => {
-        const tokens = tokenizeLine(line)
+        const tokens = tokenizeLine(line, lang)
         return tokens
             .map((t) => {
                 const escaped = t.content

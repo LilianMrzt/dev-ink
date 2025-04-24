@@ -19,7 +19,8 @@
     text-align: left;
 }
 
-.token-keyword {
+.token-keyword,
+.token-semicolon {
     color: #be7132;
     font-weight: bold;
 }
@@ -33,6 +34,26 @@
     font-style: italic;
 }
 
+.token-brace,
+.token-colon,
+.token-symbol,
+.token-property,
 .token-identifier {
     color: white;
+}
+
+.token-function,
+.token-selector,
+.token-custom-property {
+    color: #fdc56c;
+}
+
+.token-unit,
+.token-value {
+    color: #97b25b;
+}
+
+.token-hex,
+.token-number {
+    color: #6490b2;
 }

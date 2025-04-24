@@ -25,6 +25,7 @@ export const EditorWindow: FC<EditorWindowProps> = ({
             >
                 <EditorHighlight
                     code={code}
+                    fixture={fixture}
                 />
                 <EditorTextArea
                     code={code}

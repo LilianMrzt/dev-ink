@@ -1,7 +1,9 @@
+import { LanguageGrammar } from '@interfaces/types/LanguageGrammar'
+
 /**
  * Ensemble des mots-clés reconnus dans un contexte TypeScript.
  */
-export const keywords = new Set([
+export const typescriptKeywords = new Set([
     'export',
     'const',
     'class',
@@ -20,7 +22,7 @@ export const keywords = new Set([
  * Grammaire TypeScript basique définissant les types de tokens reconnus
  * et leurs expressions régulières respectives.
  */
-export const grammar = [
+export const typescriptGrammar = [
     {
         type: 'comment',
         regex: /^\/\/.*/
@@ -38,3 +40,8 @@ export const grammar = [
         regex: /^\w+/
     }
 ]
+
+export const typescript: LanguageGrammar = {
+    keywords: typescriptKeywords,
+    grammar: typescriptGrammar
+}
