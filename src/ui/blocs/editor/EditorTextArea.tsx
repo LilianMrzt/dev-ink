@@ -2,6 +2,8 @@ import React, { ChangeEvent, FC, useEffect, useRef } from 'react'
 import './editor-text-area.css'
 import { EditorTextAreaProps } from '@interfaces/ui/blocs/editor/EditorTextAreaProps'
 import { handleEditorKeyDown } from '@utils/keys-press/handleEditorKeyDown'
+import { createHistory, pushHistory } from '@utils/editorHistory'
+import { HistoryState } from '@interfaces/types/History'
 
 const EditorTextArea: FC<EditorTextAreaProps> = ({
     setCode,
@@ -11,6 +13,8 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
     onChange
 }) => {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+    const historyRef = useRef<HistoryState>(createHistory())
+    const debounceTimeout = useRef<number | null>(null)
 
     useEffect(() => {
         setCode(fixture.content)
@@ -22,6 +26,20 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      */
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newValue = e.target.value
+
+        if (textareaRef.current) {
+            if ('selectionStart' in textareaRef.current) {
+                pushHistory(historyRef.current, {
+                    code,
+                    cursor: textareaRef.current.selectionStart
+                })
+            }
+        }
+
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current as number)
+        }
+
         setCode(newValue)
         onChange(fixture.id, newValue)
     }
@@ -41,7 +59,7 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      * Gestion de la pression des touches du clavier
      */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        handleEditorKeyDown(e, code, textareaRef.current, setCode, onChange, fixture.id)
+        handleEditorKeyDown(e, code, textareaRef.current, setCode, onChange, fixture.id, historyRef.current)
     }
 
     return (

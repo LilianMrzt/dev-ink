@@ -15,6 +15,7 @@ export const typescriptKeywords = new Set([
     'else',
     'true',
     'false',
+    'import',
     'null'
 ])
 
