@@ -20,8 +20,6 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
         return Prism.highlight(code, grammar, language)
     }
 
-    console.log('test')
-
     return (
         <pre
             className={'editor-highlight'}

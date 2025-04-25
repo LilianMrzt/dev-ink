@@ -19,6 +19,14 @@ function createWindow(): void{
         }
     })
 
+    mainWindow.on('enter-full-screen', () => {
+        mainWindow?.webContents.send('fullscreen-changed', true)
+    })
+
+    mainWindow.on('leave-full-screen', () => {
+        mainWindow?.webContents.send('fullscreen-changed', false)
+    })
+
     mainWindow.webContents.on('before-input-event', (event, input) => {
         if (input.key === 'F11') {
             event.preventDefault()
@@ -37,7 +45,7 @@ function createWindow(): void{
 
     mainWindow.loadURL(startUrl)
 
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
     mainWindow.on('closed', () => {
         mainWindow = null
@@ -59,7 +67,7 @@ app.on('activate', () => {
 })
 
 ipcMain.on('set-title-bar-colors', (event, colors: { backgroundColor: string, symbolColor: string }) => {
-    if (mainWindow) {
+    if (mainWindow && mainWindow.setTitleBarOverlay) {
         mainWindow.setTitleBarOverlay({
             color: colors.backgroundColor,
             symbolColor: colors.symbolColor
