@@ -25,6 +25,14 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
         }, 50)
 
         setThemeName(newThemeName)
+
+        if (window.electronAPI?.setTitleBarColors) {
+            const newTheme = themes[newThemeName]
+            window.electronAPI.setTitleBarColors(
+                newTheme.primary,
+                newTheme.tertiary
+            )
+        }
     }
 
     /**
@@ -35,6 +43,13 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
         Object.entries(theme).forEach(([key, value]) => {
             root.style.setProperty(`--${key}`, value)
         })
+
+        if (window.electronAPI?.setTitleBarColors) {
+            window.electronAPI.setTitleBarColors(
+                theme.primary,
+                theme.text
+            )
+        }
     }, [theme])
 
     return (

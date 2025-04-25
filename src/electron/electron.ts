@@ -1,16 +1,27 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
+import { ipcMain } from 'electron'
 
 let mainWindow: BrowserWindow | null = null
 
 function createWindow(): void{
     mainWindow = new BrowserWindow({
-        fullscreen: false,
         width: 1280,
         height: 800,
+        frame: false,
+        titleBarStyle: 'hidden',
+        titleBarOverlay: true,
         webPreferences: {
-            contextIsolation: true
+            contextIsolation: true,
+            nodeIntegration: false,
+            preload: path.join(__dirname, 'preload.js')
+        }
+    })
+
+    mainWindow.webContents.on('before-input-event', (event, input) => {
+        if (input.key === 'F11') {
+            event.preventDefault()
         }
     })
 
@@ -44,5 +55,14 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
+    }
+})
+
+ipcMain.on('set-title-bar-colors', (event, colors: { backgroundColor: string, symbolColor: string }) => {
+    if (mainWindow) {
+        mainWindow.setTitleBarOverlay({
+            color: colors.backgroundColor,
+            symbolColor: colors.symbolColor
+        })
     }
 })

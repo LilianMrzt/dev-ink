@@ -1,0 +1,14 @@
+.title-bar {
+    height: 31px;
+    background-color: var(--primary);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border-bottom: 1px solid var(--outline);
+}
+
+.draggable {
+    -webkit-app-region: drag;
+    user-select: none;
+}
