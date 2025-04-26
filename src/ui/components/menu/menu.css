@@ -1,0 +1,28 @@
+.menu {
+    position: relative;
+}
+
+.menu-label {
+    padding: 4px 8px;
+    background-color: var(--primary);
+    height: 31px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.menu-label.active {
+    background-color: var(--primaryHover);
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 31px;
+    left: 0;
+    min-width: 180px;
+    z-index: 100;
+    background-color: var(--primary);
+    border: 1px solid var(--outline);
+    display: flex;
+    flex-direction: column;
+}

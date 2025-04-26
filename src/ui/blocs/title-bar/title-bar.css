@@ -6,6 +6,7 @@
     align-items: center;
     padding-left: 10px;
     border-bottom: 1px solid var(--outline);
+    gap: 16px;
 }
 
 .draggable {

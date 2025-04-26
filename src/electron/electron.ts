@@ -1,7 +1,8 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 import { ipcMain } from 'electron'
+import { menuTemplate } from './ElectronMenuTemplate'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -32,6 +33,15 @@ function createWindow(): void{
             event.preventDefault()
         }
     })
+
+    const isMac = process.platform === 'darwin'
+
+    if (isMac) {
+        const menu = Menu.buildFromTemplate(menuTemplate)
+        Menu.setApplicationMenu(menu)
+    } else {
+        mainWindow.setMenu(null)
+    }
 
     const isDev = !app.isPackaged
 

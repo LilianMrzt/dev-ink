@@ -1,0 +1,5 @@
+.title-bar-menu-group {
+    display: flex;
+    align-items: center;
+    -webkit-app-region: no-drag;
+}

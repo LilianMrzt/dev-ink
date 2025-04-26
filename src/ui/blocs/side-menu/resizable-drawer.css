@@ -1,5 +1,5 @@
 .resizable-drawer {
-    height: calc(100vh - 50px);
+    height: calc(100vh - 81px);
     min-width: 200px;
     max-width: 600px;
     background-color: var(--primary);

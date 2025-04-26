@@ -16,6 +16,7 @@ code {
 
 :root {
   --primary: '';
+  --primaryHover: '';
   --secondary: '';
   --tertiary: '';
   --background: '';
