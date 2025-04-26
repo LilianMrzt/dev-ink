@@ -7,9 +7,9 @@ import MenuItem from '@components/menu/MenuItem'
 const TitleBarMenuGroup = () => {
     const { isMac } = useWindowState()
 
-    if (isMac) return null
-
     const [openedMenu, setOpenedMenu] = useState<string | null>(null)
+
+    if (isMac) return null
 
     return (
         <div

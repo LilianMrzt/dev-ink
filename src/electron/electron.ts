@@ -7,6 +7,8 @@ import { menuTemplate } from './ElectronMenuTemplate'
 let mainWindow: BrowserWindow | null = null
 
 function createWindow(): void{
+    app.setName('Dev-Ink')
+
     mainWindow = new BrowserWindow({
         width: 1280,
         height: 800,
