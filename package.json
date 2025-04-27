@@ -6,9 +6,9 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "build:electron": "tsc -p tsconfig.electron.json",
-    "desktop": "yarn build && yarn build:electron && electron ./dist/electron.js",
-    "desktop:dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electronmon ./dist/electron.js\""
+    "build:electron": "tsc -p tsconfig.electron.json && tsc ./src/electron/preload.ts --outDir dist",
+    "desktop": "yarn build && yarn build:electron && electron ./dist/electron/electron.js",
+    "desktop:dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electronmon ./dist/electron/electron.js\""
   },
   "dependencies": {
     "prismjs": "^1.30.0",

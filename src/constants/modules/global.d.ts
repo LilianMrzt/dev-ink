@@ -7,7 +7,8 @@ declare global {
         electronAPI?: {
             setTitleBarColors: (backgroundColor: string, symbolColor: string) => void,
             onFullScreenChanged: (isFullScreen: (fullScreen) => void) => void,
-            selectFolder: () => Promise<{ folderPath: string, structure: FolderEntry[] } | null>
+            selectFolder: () => Promise<{ folderPath: string, structure: FolderEntry[] } | null>,
+            getLastOpenedFolder: () => Promise<{ folderPath: string; structure: FolderEntry[] } | null>
         }
     }
 }

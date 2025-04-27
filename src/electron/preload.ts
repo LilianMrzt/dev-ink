@@ -11,5 +11,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     selectFolder: () => {
         return ipcRenderer.invoke('select-folder')
+    },
+    getLastOpenedFolder: () => {
+        return ipcRenderer.invoke('get-last-opened-folder')
     }
 })

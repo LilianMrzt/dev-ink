@@ -7,7 +7,7 @@ import Text from '@components/text/Text'
 import ProjectDrawer from '@ui/blocs/drawers/project-drawer/ProjectDrawer'
 
 const SideMenu = () => {
-    const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false)
+    const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(true)
     const [isGitDrawerOpen, setIsGitDrawerOpen] = useState(false)
 
     /**

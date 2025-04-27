@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as url from 'url'
 import { setupIpcHandlers } from './ipcHandlers'
 import { setupMenu } from './menu'
+import { loadSettings } from './settings'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -58,7 +59,10 @@ function createWindow(): void{
     })
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+    loadSettings()
+    createWindow()
+})
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
