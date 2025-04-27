@@ -11,12 +11,29 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
 }) => {
     const { theme } = useTheme()
 
+    const iconColor = (): string => {
+        const ext = item.name.split('.').pop()?.toLowerCase()
+
+        switch (ext) {
+        case 'css':
+            return '#ad6c79'
+        case 'ts':
+        case 'tsx':
+            return '#3f93b0'
+        case 'js':
+        case 'jsx':
+            return '#FED000'
+        default:
+            return theme.text
+        }
+    }
+
     return (
         <div
             className={'project-drawer-file-item'}
         >
             <Icon
-                color={theme.text}
+                color={iconColor()}
             >
                 <FileIcon/>
             </Icon>

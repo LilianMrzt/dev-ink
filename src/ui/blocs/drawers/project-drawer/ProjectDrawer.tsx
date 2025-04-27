@@ -15,7 +15,7 @@ const ProjectDrawer = (): ReactNode => {
         <ResizableDrawer
             storageKey={'ProjectDrawerStorageKey'}
         >
-            {openFolder.structure.map((item) => {
+            {openFolder?.structure.map((item) => {
                 return (
                     item.isDirectory
                         ? <ProjectDrawerFolderItem

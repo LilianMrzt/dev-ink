@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import Text from '@components/text/Text'
 import Icon from '@components/resources/Icon'
-import { FolderIcon } from '@resources/Icons'
+import { ChevronDownIcon, ChevronRightIcon, FolderIcon } from '@resources/Icons'
 import { useTheme } from '@hooks/ThemeContext'
 import './project-drawer-folder-item.css'
 import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolderFileItem'
@@ -24,8 +24,15 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
             >
                 <Icon
                     color={theme.text}
-                    fill={theme.text}
-
+                >
+                    {showChildren ? (
+                        <ChevronDownIcon/>
+                    ) : (
+                        <ChevronRightIcon/>
+                    )}
+                </Icon>
+                <Icon
+                    color={theme.text}
                 >
                     <FolderIcon/>
                 </Icon>

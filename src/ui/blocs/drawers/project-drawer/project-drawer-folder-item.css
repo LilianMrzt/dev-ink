@@ -3,8 +3,9 @@
     align-items: center;
     justify-content: start;
     gap: 4px;
+    height: 20px;
 }
 
 .project-drawer-folder-item-children {
-    padding-left: 24px;
+    padding-left: 20px;
 }
