@@ -1,10 +1,8 @@
-import { app, BrowserWindow, Menu, dialog } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
-import { ipcMain } from 'electron'
-import { menuTemplate } from './ElectronMenuTemplate'
-import * as fs from 'fs'
-import { FolderEntry } from '../interfaces/types/FolderEntry'
+import { setupIpcHandlers } from './ipcHandlers'
+import { setupMenu } from './menu'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -38,14 +36,8 @@ function createWindow(): void{
         }
     })
 
-    const isMac = process.platform === 'darwin'
-
-    if (isMac) {
-        const menu = Menu.buildFromTemplate(menuTemplate)
-        Menu.setApplicationMenu(menu)
-    } else {
-        mainWindow.setMenu(null)
-    }
+    setupMenu(mainWindow)
+    setupIpcHandlers(mainWindow)
 
     const isDev = !app.isPackaged
 
@@ -66,9 +58,7 @@ function createWindow(): void{
     })
 }
 
-app.whenReady().then(() => {
-    createWindow()
-})
+app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
@@ -78,47 +68,4 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
-})
-
-ipcMain.on('set-title-bar-colors', (event, colors: { backgroundColor: string, symbolColor: string }) => {
-    if (mainWindow && mainWindow.setTitleBarOverlay) {
-        mainWindow.setTitleBarOverlay({
-            color: colors.backgroundColor,
-            symbolColor: colors.symbolColor
-        })
-    }
-})
-
-ipcMain.handle('select-folder', async () => {
-    const result = await dialog.showOpenDialog({
-        properties: ['openDirectory']
-    })
-
-    if (result.canceled || result.filePaths.length === 0) {
-        return null
-    }
-
-    const folderPath = result.filePaths[0]
-
-    const readFolder = (dirPath: string): FolderEntry[] => {
-        const entries = fs.readdirSync(dirPath, { withFileTypes: true })
-
-        return entries.map(entry => {
-            return {
-                name: entry.name,
-                path: path.join(dirPath, entry.name),
-                isDirectory: entry.isDirectory(),
-                children: entry.isDirectory() ? readFolder(path.join(dirPath, entry.name)) : undefined
-            }
-        })
-    }
-
-    const folderStructure = [{
-        name: path.basename(folderPath),
-        path: folderPath,
-        isDirectory: true,
-        children: readFolder(folderPath)
-    }]
-
-    return { folderPath, structure: folderStructure }
 })
