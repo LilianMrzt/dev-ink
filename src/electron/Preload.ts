@@ -8,5 +8,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
         ipcRenderer.on('fullscreen-changed', (_event, isFullScreen) => {
             return callback(isFullScreen)
         })
+    },
+    selectFolder: () => {
+        return ipcRenderer.invoke('select-folder')
     }
 })

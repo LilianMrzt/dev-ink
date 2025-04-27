@@ -3,9 +3,11 @@ import { useWindowState } from '@hooks/useWindowState'
 import './title-bar-menu-group.css'
 import Menu from '@components/menu/Menu'
 import MenuItem from '@components/menu/MenuItem'
+import { useFolder } from '@hooks/FolderContext'
 
 const TitleBarMenuGroup = () => {
     const { isMac } = useWindowState()
+    const { openNewFolder } = useFolder()
 
     const [openedMenu, setOpenedMenu] = useState<string | null>(null)
 
@@ -20,6 +22,15 @@ const TitleBarMenuGroup = () => {
                 openedMenu={openedMenu}
                 setOpenedMenu={setOpenedMenu}
             >
+                <MenuItem
+                    label={'Open folder'}
+                    onClick={() => {
+                        openNewFolder()
+                            .then(() => {
+                                setOpenedMenu(null)
+                            })
+                    }}
+                />
                 <MenuItem
                     label={'Exit'}
                     onClick={() => {

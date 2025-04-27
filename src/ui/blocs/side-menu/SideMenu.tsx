@@ -4,6 +4,7 @@ import SideMenuButton from '@ui/blocs/side-menu/SideMenuButton'
 import { FolderOpenIcon, GitBranchIcon } from '@resources/Icons'
 import ResizableDrawer from '@ui/blocs/side-menu/ResizableDrawer'
 import Text from '@components/text/Text'
+import ProjectDrawer from '@ui/blocs/drawers/project-drawer/ProjectDrawer'
 
 const SideMenu = () => {
     const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false)
@@ -66,13 +67,7 @@ const SideMenu = () => {
                 </SideMenuButton>
             </div>
             {isProjectDrawerOpen && (
-                <ResizableDrawer
-                    storageKey={'ProjectDrawerStorageKey'}
-                >
-                    <Text>
-                        Test
-                    </Text>
-                </ResizableDrawer>
+                <ProjectDrawer/>
             )}
             {isGitDrawerOpen && (
                 <ResizableDrawer

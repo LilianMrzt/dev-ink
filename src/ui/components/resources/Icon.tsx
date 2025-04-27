@@ -6,6 +6,7 @@ const Icon: FC<IconProps> = ({
     children,
     size = 16,
     color,
+    fill,
     backgroundColor,
     padding
 }): ReactNode => {
@@ -19,7 +20,8 @@ const Icon: FC<IconProps> = ({
                 minHeight: size,
                 color,
                 backgroundColor,
-                padding
+                padding,
+                fill
             }}
         >
             {children}

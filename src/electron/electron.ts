@@ -1,8 +1,10 @@
-import { app, BrowserWindow, Menu } from 'electron'
+import { app, BrowserWindow, Menu, dialog } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 import { ipcMain } from 'electron'
 import { menuTemplate } from './ElectronMenuTemplate'
+import * as fs from 'fs'
+import { FolderEntry } from '../interfaces/types/FolderEntry'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -85,4 +87,38 @@ ipcMain.on('set-title-bar-colors', (event, colors: { backgroundColor: string, sy
             symbolColor: colors.symbolColor
         })
     }
+})
+
+ipcMain.handle('select-folder', async () => {
+    const result = await dialog.showOpenDialog({
+        properties: ['openDirectory']
+    })
+
+    if (result.canceled || result.filePaths.length === 0) {
+        return null
+    }
+
+    const folderPath = result.filePaths[0]
+
+    const readFolder = (dirPath: string): FolderEntry[] => {
+        const entries = fs.readdirSync(dirPath, { withFileTypes: true })
+
+        return entries.map(entry => {
+            return {
+                name: entry.name,
+                path: path.join(dirPath, entry.name),
+                isDirectory: entry.isDirectory(),
+                children: entry.isDirectory() ? readFolder(path.join(dirPath, entry.name)) : undefined
+            }
+        })
+    }
+
+    const folderStructure = [{
+        name: path.basename(folderPath),
+        path: folderPath,
+        isDirectory: true,
+        children: readFolder(folderPath)
+    }]
+
+    return { folderPath, structure: folderStructure }
 })

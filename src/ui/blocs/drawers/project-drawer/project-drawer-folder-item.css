@@ -1,0 +1,10 @@
+.project-drawer-folder-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 4px;
+}
+
+.project-drawer-folder-item-children {
+    padding-left: 24px;
+}
