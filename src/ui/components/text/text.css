@@ -5,4 +5,5 @@
     font-family: 'Public Sans', sans-serif;
     width: fit-content;
     text-align: center;
+    white-space: nowrap;
 }
