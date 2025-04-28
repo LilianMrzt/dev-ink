@@ -9,14 +9,15 @@ import { useEditor } from '@hooks/EditorContext'
 const EditorTextArea: FC<EditorTextAreaProps> = ({
     setCode,
     code,
-    linesRef
+    linesRef,
+    textareaRef,
+    highlightRef
 }) => {
     const {
         activeFile,
         handleActiveFileChange
     } = useEditor()
 
-    const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const historyRef = useRef<HistoryState>(createHistory())
     const debounceTimeout = useRef<number | null>(null)
 
@@ -50,12 +51,19 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
     }
 
     /**
-     * Synchronise le scroll vertical du textarea avec la colonne des numéros de ligne.
+     * Synchronise le scroll du textarea avec la colonne des numéros de ligne et le highlight.
      */
     const handleScroll = () => {
-        if (textareaRef.current && linesRef.current) {
-            if ('scrollTop' in linesRef.current && 'scrollTop' in textareaRef.current) {
+        if (textareaRef.current) {
+            if (linesRef.current && 'scrollTop' in linesRef.current && 'scrollTop' in textareaRef.current) {
                 linesRef.current.scrollTop = textareaRef.current.scrollTop
+            }
+            if (highlightRef.current &&
+                'scrollTop' in highlightRef.current && 'scrollTop' in textareaRef.current &&
+                'scrollLeft' in highlightRef.current && 'scrollLeft' in textareaRef.current
+            ) {
+                highlightRef.current.scrollTop = textareaRef.current.scrollTop
+                highlightRef.current.scrollLeft = textareaRef.current.scrollLeft
             }
         }
     }

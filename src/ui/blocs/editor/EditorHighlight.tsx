@@ -12,7 +12,8 @@ import 'prismjs/components/prism-javascript'
 import { useEditor } from '@hooks/EditorContext'
 
 const EditorHighlight: FC<EditorHighlightProps> = ({
-    code
+    code,
+    highlightRef
 }) => {
     const {
         activeFile
@@ -39,13 +40,16 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
     function highlightCode(code: string, language: string): string{
         const grammar = Prism.languages[language]
         if (!grammar) return code
-        return Prism.highlight(code, grammar, language)
+        const highlighted = Prism.highlight(code, grammar, language)
+
+        return highlighted.replace(/(\n)(?=\n*$)/, '\n&nbsp;')
     }
 
     const language = detectLanguage(activeFile.name)
 
     return (
         <pre
+            ref={highlightRef}
             className={'editor-highlight'}
         >
             <code

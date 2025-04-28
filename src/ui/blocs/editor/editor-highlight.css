@@ -6,12 +6,12 @@
     font-family: monospace;
     font-size: 14px;
     line-height: 1.5;
-    white-space: pre-wrap;
-    word-break: break-word;
+    white-space: pre;
     pointer-events: none;
     z-index: 3;
     box-sizing: border-box;
     color: var(--text);
+    overflow: scroll;
 }
 
 .editor-highlight code {

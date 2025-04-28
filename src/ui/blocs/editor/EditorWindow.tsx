@@ -8,6 +8,8 @@ import { useEditor } from '@hooks/EditorContext'
 export const EditorWindow = () => {
     const [code, setCode] = useState('')
     const linesRef = useRef<HTMLDivElement | null>(null)
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+    const highlightRef = useRef<HTMLPreElement | null>(null)
 
     const {
         activeFile,
@@ -40,12 +42,15 @@ export const EditorWindow = () => {
                 className={'editor-layer'}
             >
                 <EditorHighlight
+                    highlightRef={highlightRef}
                     code={code}
                 />
                 <EditorTextArea
                     code={code}
                     setCode={setCode}
                     linesRef={linesRef}
+                    textareaRef={textareaRef}
+                    highlightRef={highlightRef}
                 />
             </div>
         </div>
