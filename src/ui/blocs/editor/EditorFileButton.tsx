@@ -1,12 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import './editor-file-button.css'
 import Text from '@components/text/Text'
 import { useTheme } from '@hooks/ThemeContext'
-import { darkenOrLightenColor } from '@utils/ColorUtils'
 import { EditorFileButtonProps } from '@interfaces/ui/blocs/editor/EditorFileButtonProps'
 import Icon from '@components/resources/Icon'
-import { CloseIcon } from '@resources/Icons'
+import { CloseIcon, FileIcon } from '@resources/Icons'
 import { useEditor } from '@hooks/EditorContext'
+import { filesIconColor } from '@constants/filesIcons'
 
 const EditorFileButton: FC<EditorFileButtonProps> = ({
     openedFile,
@@ -16,17 +16,34 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
     const { theme } = useTheme()
     const { closeFile } = useEditor()
     const isSelected = openedFile.id === activeId
+    const [isHovered, setIsHovered] = useState(false)
+
+    const backgroundColor = isSelected
+        ? theme.primaryHover
+        : isHovered ? theme.background : theme.primary
 
     return (
         <button
-            className={`editor-file-button ${isSelected ? 'active' : ''}`}
+            className={'editor-file-button'}
             onClick={() => {
                 return setActiveId(openedFile.id)
             }}
             style={{
-                backgroundColor: isSelected ? darkenOrLightenColor(theme.primary, 'lighten') : theme.primary
+                backgroundColor:backgroundColor,
+                borderColor: backgroundColor
+            }}
+            onMouseEnter={() => {
+                setIsHovered(true)
+            }}
+            onMouseLeave={() => {
+                setIsHovered(false)
             }}
         >
+            <Icon
+                color={filesIconColor(openedFile.name, theme)}
+            >
+                <FileIcon/>
+            </Icon>
             <Text
                 fontSize={13}
             >
