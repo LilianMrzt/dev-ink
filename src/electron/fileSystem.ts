@@ -7,13 +7,14 @@ const HIDDEN_FILES_AND_FOLDERS = [
     '.DS_Store'
 ]
 
-export function readFolderStructure(dirPath: string): FolderEntry[]{
+const readFolderChildren = (dirPath: string): FolderEntry[] => {
     const entries = fs.readdirSync(dirPath, { withFileTypes: true })
 
     const visibleEntries = entries
-        .filter(entry => {
+        .filter((entry) => {
             const isHidden = entry.name.startsWith('.') || HIDDEN_FILES_AND_FOLDERS.includes(entry.name)
-            return !isHidden
+            const isSelfNamedFolder = entry.isDirectory() && entry.name === path.basename(dirPath)
+            return !isHidden && !isSelfNamedFolder
         })
         .sort((a, b) => {
             if (a.isDirectory() && !b.isDirectory()) return -1
@@ -21,17 +22,21 @@ export function readFolderStructure(dirPath: string): FolderEntry[]{
             return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
         })
 
+    return visibleEntries.map((entry) => {
+        return {
+            name: entry.name,
+            path: path.join(dirPath, entry.name),
+            isDirectory: entry.isDirectory(),
+            children: entry.isDirectory() ? readFolderChildren(path.join(dirPath, entry.name)) : undefined
+        }
+    })
+}
+
+export const readFolderStructure = (dirPath: string): FolderEntry[] => {
     return [{
         name: path.basename(dirPath),
         path: dirPath,
         isDirectory: true,
-        children: visibleEntries.map(entry => {
-            return {
-                name: entry.name,
-                path: path.join(dirPath, entry.name),
-                isDirectory: entry.isDirectory(),
-                children: entry.isDirectory() ? readFolderStructure(path.join(dirPath, entry.name)) : undefined
-            }
-        })
+        children: readFolderChildren(dirPath)
     }]
 }
