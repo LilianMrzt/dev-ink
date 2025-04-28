@@ -18,6 +18,7 @@ export const EditorProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [openedFiles, setOpenedFiles] = useState<File[]>([])
     const [activeFileId, setActiveFileId] = useState<string | null>(null)
 
+    // TODO: Retirer le !
     const activeFile = openedFiles.find((f) => {
         return f.id === activeFileId
     })!
@@ -61,16 +62,22 @@ export const EditorProvider: FC<{ children: ReactNode }> = ({ children }) => {
      */
     const closeFile = (fileId: string) => {
         setOpenedFiles((prev) => {
-            return prev.filter((file) => {
+            const newFiles = prev.filter((file) => {
                 return file.id !== fileId
             })
-        })
 
-        setActiveFileId((currentId) => {
-            if (currentId === fileId) {
-                return null
-            }
-            return currentId
+            setActiveFileId((currentId) => {
+                if (currentId === fileId) {
+                    if (newFiles.length > 0) {
+                        return newFiles[newFiles.length - 1].id
+                    } else {
+                        return null
+                    }
+                }
+                return currentId
+            })
+
+            return newFiles
         })
     }
 
