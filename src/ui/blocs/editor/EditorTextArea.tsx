@@ -4,21 +4,25 @@ import { EditorTextAreaProps } from '@interfaces/ui/blocs/editor/EditorTextAreaP
 import { handleEditorKeyDown } from '@utils/keys-press/handleEditorKeyDown'
 import { createHistory, pushHistory, snapshot } from '@utils/editorHistory'
 import { HistoryState } from '@interfaces/types/History'
+import { useEditor } from '@hooks/EditorContext'
 
 const EditorTextArea: FC<EditorTextAreaProps> = ({
     setCode,
     code,
-    linesRef,
-    fixture,
-    onChange
+    linesRef
 }) => {
+    const {
+        activeFile,
+        handleActiveFileChange
+    } = useEditor()
+
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const historyRef = useRef<HistoryState>(createHistory())
     const debounceTimeout = useRef<number | null>(null)
 
     useEffect(() => {
-        setCode(fixture.content)
-    }, [fixture.id, fixture.content])
+        setCode(activeFile.content)
+    }, [activeFile.id, activeFile.content])
 
     /**
      * Gère la modification du contenu du textarea.
@@ -42,7 +46,7 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
         }
 
         setCode(newValue)
-        onChange(fixture.id, newValue)
+        handleActiveFileChange(activeFile.id, newValue)
     }
 
     /**
@@ -60,7 +64,7 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      * Gestion de la pression des touches du clavier
      */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        handleEditorKeyDown(e, code, textareaRef.current, setCode, onChange, fixture.id, historyRef.current)
+        handleEditorKeyDown(e, code, textareaRef.current, setCode, handleActiveFileChange, activeFile.id, historyRef.current)
     }
 
     return (

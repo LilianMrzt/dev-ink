@@ -1,8 +1,8 @@
-import { Fixture } from '@src/fixtures'
 import { Dispatch, SetStateAction } from 'react'
+import { File } from '@interfaces/types/File'
 
 export interface EditorFileButtonProps {
-    fix: Fixture
-    activeId: string
-    setActiveId: Dispatch<SetStateAction<string>>
+    openedFile: File
+    activeId: string | null
+    setActiveId: Dispatch<SetStateAction<string | null>>
 }

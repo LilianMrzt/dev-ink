@@ -5,6 +5,7 @@ import { ProjectFolderFileItemProps } from '@interfaces/ui/blocs/drawers/project
 import Icon from '@components/resources/Icon'
 import { FileIcon } from '@resources/Icons'
 import { useTheme } from '@hooks/ThemeContext'
+import { useEditor } from '@hooks/EditorContext'
 
 const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
     item,
@@ -13,6 +14,9 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
     depth = 0
 }) => {
     const { theme } = useTheme()
+    const {
+        openFile
+    } = useEditor()
 
     const isActive = activeItem === item.path
 
@@ -42,6 +46,21 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
             onClick={() => {
                 setActiveItem(item.path)
             }}
+            onDoubleClick={async () => {
+                setActiveItem(item.path)
+
+                if (!item.isDirectory) {
+                    const content = await window.electronAPI?.readFile(item.path) || ''
+
+                    openFile({
+                        id: item.path,
+                        path: item.path,
+                        name: item.name,
+                        content
+                    })
+                }
+            }}
+
         >
             <Icon
                 color={iconColor()}

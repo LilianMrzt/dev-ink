@@ -9,16 +9,40 @@ import 'prismjs/components/prism-json'
 import 'prismjs/components/prism-markup'
 import 'prismjs/components/prism-css'
 import 'prismjs/components/prism-javascript'
+import { useEditor } from '@hooks/EditorContext'
 
 const EditorHighlight: FC<EditorHighlightProps> = ({
-    code,
-    fixture
+    code
 }) => {
+    const {
+        activeFile
+    } = useEditor()
+
+    /**
+     * Detection du language du fichier ouvert
+     * @param filename
+     */
+    const detectLanguage = (filename: string): string => {
+        const ext = filename.split('.').pop()?.toLowerCase()
+        switch (ext) {
+        case 'ts': return 'typescript'
+        case 'tsx': return 'tsx'
+        case 'js': return 'javascript'
+        case 'jsx': return 'jsx'
+        case 'json': return 'json'
+        case 'html': return 'markup'
+        case 'css': return 'css'
+        default: return 'plaintext'
+        }
+    }
+
     function highlightCode(code: string, language: string): string{
         const grammar = Prism.languages[language]
         if (!grammar) return code
         return Prism.highlight(code, grammar, language)
     }
+
+    const language = detectLanguage(activeFile.name)
 
     return (
         <pre
@@ -26,7 +50,7 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
         >
             <code
                 dangerouslySetInnerHTML={{
-                    __html: highlightCode(code, fixture.language)
+                    __html: highlightCode(code, language)
                 }}
             />
         </pre>

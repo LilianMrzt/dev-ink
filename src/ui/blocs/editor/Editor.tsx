@@ -1,28 +1,15 @@
-import React, { useState } from 'react'
-import { Fixture, sampleFixtures } from '@src/fixtures'
+import React from 'react'
 import { EditorWindow } from '@ui/blocs/editor/EditorWindow'
 import './editor.css'
 import EditorFileButton from '@ui/blocs/editor/EditorFileButton'
+import { useEditor } from '@hooks/EditorContext'
 
 const Editor = () => {
-    const [fixtures, setFixtures] = useState<Fixture[]>(sampleFixtures)
-    const [activeId, setActiveId] = useState<string>(fixtures[0].id)
-
-    const handleChange = (id: string, newValue: string | undefined) => {
-        setFixtures((prev) => {
-            return prev.map((fix) => {
-                return (fix.id === id ? {
-                    ...fix,
-                    content: newValue || ''
-                } : fix)
-            })
-        }
-        )
-    }
-
-    const activeFixture = fixtures.find((f) => {
-        return f.id === activeId
-    })!
+    const {
+        openedFiles,
+        activeFileId,
+        setActiveFileId
+    } = useEditor()
 
     return (
         <div
@@ -31,21 +18,18 @@ const Editor = () => {
             <div
                 className={'editor-button-row'}
             >
-                {fixtures.map((fix) => {
+                {openedFiles.map((openedFile) => {
                     return (
                         <EditorFileButton
-                            key={fix.id}
-                            fix={fix}
-                            activeId={activeId}
-                            setActiveId={setActiveId}
+                            key={openedFile.id}
+                            openedFile={openedFile}
+                            activeId={activeFileId}
+                            setActiveId={setActiveFileId}
                         />
                     )
                 })}
             </div>
-            <EditorWindow
-                fixture={activeFixture}
-                onChange={handleChange}
-            />
+            <EditorWindow/>
         </div>
     )
 }

@@ -41,4 +41,14 @@ export function setupIpcHandlers(mainWindow: BrowserWindow){
         }
         return null
     })
+
+    ipcMain.handle('read-file', async (_event, filePath: string) => {
+        try {
+            return fs.readFileSync(filePath, 'utf-8')
+        } catch (error) {
+            console.error('Failed to read file:', filePath, error)
+            return ''
+        }
+    })
+
 }

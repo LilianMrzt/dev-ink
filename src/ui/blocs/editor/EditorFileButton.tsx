@@ -6,19 +6,18 @@ import { darkenOrLightenColor } from '@utils/ColorUtils'
 import { EditorFileButtonProps } from '@interfaces/ui/blocs/editor/EditorFileButtonProps'
 
 const EditorFileButton: FC<EditorFileButtonProps> = ({
-    fix,
+    openedFile,
     activeId,
     setActiveId
 }) => {
-
     const { theme } = useTheme()
-    const isSelected = fix.id === activeId
+    const isSelected = openedFile.id === activeId
 
     return (
         <button
             className={`editor-file-button ${isSelected ? 'active' : ''}`}
             onClick={() => {
-                return setActiveId(fix.id)
+                return setActiveId(openedFile.id)
             }}
             style={{
                 backgroundColor: isSelected ? darkenOrLightenColor(theme.primary, 'lighten') : theme.primary
@@ -27,7 +26,7 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
             <Text
                 fontSize={13}
             >
-                {fix.name}
+                {openedFile.name}
             </Text>
         </button>
     )

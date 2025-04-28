@@ -17,5 +17,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     onOpenFolderDialog: (callback: () => void) => {
         ipcRenderer.on('open-folder-dialog', callback)
+    },
+    readFile: (filePath: string) => {
+        return ipcRenderer.invoke('read-file', filePath)
     }
 })

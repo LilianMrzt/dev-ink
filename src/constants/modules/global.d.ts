@@ -9,7 +9,8 @@ declare global {
             onFullScreenChanged: (isFullScreen: (fullScreen) => void) => void,
             selectFolder: () => Promise<{ folderPath: string, structure: FolderEntry[] } | null>,
             getLastOpenedFolder: () => Promise<{ folderPath: string; structure: FolderEntry[] } | null>,
-            onOpenFolderDialog: (callback: () => void) => void
+            onOpenFolderDialog: (callback: () => void) => void,
+            readFile: (filePath: string) => Promise<string>
         }
     }
 }
