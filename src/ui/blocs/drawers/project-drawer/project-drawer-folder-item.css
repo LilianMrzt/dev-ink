@@ -6,6 +6,6 @@
     height: 20px;
 }
 
-.project-drawer-folder-item-children {
-    padding-left: 20px;
+.project-drawer-folder-item.active {
+    background-color: var(--primaryHover);
 }

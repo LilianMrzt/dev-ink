@@ -8,18 +8,27 @@ import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolde
 import { ProjectDrawerFolderItemProps } from '@interfaces/ui/blocs/drawers/project-drawer/ProjectDrawerFolderItemProps'
 
 const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
-    item
+    item,
+    activeItem,
+    setActiveItem,
+    depth = 0
 }) => {
     const { theme } = useTheme()
+
+    const isActive = activeItem === item.path
 
     const [showChildren, setShowChildren] = useState(false)
 
     return (
         <div>
             <div
-                className={'project-drawer-folder-item'}
+                className={`project-drawer-folder-item ${isActive ? 'active' : ''}`}
+                style={{
+                    paddingLeft: depth * 20
+                }}
                 onClick={() => {
                     setShowChildren(!showChildren)
+                    setActiveItem(item.path)
                 }}
             >
                 <Icon
@@ -50,14 +59,19 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
                                 ? <ProjectDrawerFolderItem
                                     key={child.path}
                                     item={child}
+                                    activeItem={activeItem}
+                                    setActiveItem={setActiveItem}
+                                    depth={depth + 1}
                                 />
                                 : <ProjectFolderFileItem
                                     key={child.path}
                                     item={child}
+                                    activeItem={activeItem}
+                                    setActiveItem={setActiveItem}
+                                    depth={depth + 1}
                                 />
                         )
                     })}
-
                 </div>
             )}
         </div>

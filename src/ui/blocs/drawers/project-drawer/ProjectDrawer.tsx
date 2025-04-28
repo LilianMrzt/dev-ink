@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import ResizableDrawer from '@ui/blocs/side-menu/ResizableDrawer'
 import { useFolder } from '@hooks/FolderContext'
 import ProjectDrawerFolderItem from '@ui/blocs/drawers/project-drawer/ProjectDrawerFolderItem'
@@ -6,6 +6,8 @@ import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolde
 
 const ProjectDrawer = (): ReactNode => {
     const { openFolder } = useFolder()
+
+    const [activeItem, setActiveItem] = useState<string | null>(null)
 
     if (!openFolder) {
         return null
@@ -21,10 +23,14 @@ const ProjectDrawer = (): ReactNode => {
                         ? <ProjectDrawerFolderItem
                             key={item.path}
                             item={item}
+                            activeItem={activeItem}
+                            setActiveItem={setActiveItem}
                         />
                         : <ProjectFolderFileItem
                             key={item.path}
                             item={item}
+                            activeItem={activeItem}
+                            setActiveItem={setActiveItem}
                         />
                 )
             })}

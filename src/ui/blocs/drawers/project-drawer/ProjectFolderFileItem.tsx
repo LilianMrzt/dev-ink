@@ -7,9 +7,14 @@ import { FileIcon } from '@resources/Icons'
 import { useTheme } from '@hooks/ThemeContext'
 
 const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
-    item
+    item,
+    activeItem,
+    setActiveItem,
+    depth = 0
 }) => {
     const { theme } = useTheme()
+
+    const isActive = activeItem === item.path
 
     const iconColor = (): string => {
         const ext = item.name.split('.').pop()?.toLowerCase()
@@ -30,7 +35,13 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
 
     return (
         <div
-            className={'project-drawer-file-item'}
+            className={`project-drawer-file-item ${isActive ? 'active' : ''}`}
+            style={{
+                paddingLeft: (depth + 1) * 20
+            }}
+            onClick={() => {
+                setActiveItem(item.path)
+            }}
         >
             <Icon
                 color={iconColor()}
