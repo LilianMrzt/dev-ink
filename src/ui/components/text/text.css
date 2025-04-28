@@ -6,4 +6,5 @@
     width: fit-content;
     text-align: center;
     white-space: nowrap;
+    user-select: none;
 }

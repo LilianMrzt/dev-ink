@@ -27,19 +27,29 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
                     paddingLeft: depth * 20
                 }}
                 onClick={() => {
-                    setShowChildren(!showChildren)
                     setActiveItem(item.path)
                 }}
+                onDoubleClick={() => {
+                    setShowChildren(!showChildren)
+                }}
             >
-                <Icon
-                    color={theme.text}
+                <button
+                    className={'project-drawer-folder-item-icon-button'}
+                    onClick={(event) => {
+                        event.stopPropagation()
+                        setShowChildren(!showChildren)
+                    }}
                 >
-                    {showChildren ? (
-                        <ChevronDownIcon/>
-                    ) : (
-                        <ChevronRightIcon/>
-                    )}
-                </Icon>
+                    <Icon
+                        color={theme.text}
+                    >
+                        {showChildren ? (
+                            <ChevronDownIcon/>
+                        ) : (
+                            <ChevronRightIcon/>
+                        )}
+                    </Icon>
+                </button>
                 <Icon
                     color={theme.text}
                 >
