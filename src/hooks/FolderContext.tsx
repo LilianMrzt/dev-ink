@@ -1,5 +1,6 @@
 import React, { createContext, type ReactNode, useContext, useEffect, useState } from 'react'
 import { FolderEntry } from '@interfaces/types/FolderEntry'
+import { useWindowState } from '@hooks/useWindowState'
 
 interface FolderContextProps {
     openFolder: { folderPath: string; structure: FolderEntry[] } | null;
@@ -11,6 +12,7 @@ const FolderContext = createContext<FolderContextProps | undefined>(undefined)
 export const FolderProvider = ({ children }: { children: ReactNode }) => {
     const [openFolder, setOpenFolder] = useState<{ folderPath: string; structure: FolderEntry[] } | null>(null)
 
+    const { isMac } = useWindowState()
     /**
      * Ouvrir un nouveau dossier dans le drawer
      */
@@ -26,17 +28,21 @@ export const FolderProvider = ({ children }: { children: ReactNode }) => {
      * Verifier le dernier dossier ouvert et le réouvrir
      */
     useEffect(() => {
-        const fetchLastOpenedFolder = async () => {
-            return window.electronAPI?.getLastOpenedFolder()
-        }
-
-        fetchLastOpenedFolder()
+        window.electronAPI?.getLastOpenedFolder()
             .then((res) => {
                 if (res) {
                     setOpenFolder(res)
                 }
             })
-    }, [])
+
+        if (isMac) {
+            const handler = async () => {
+                await openNewFolder()
+            }
+
+            window.electronAPI?.onOpenFolderDialog(handler)
+        }
+    }, [isMac])
 
     return (
         <FolderContext.Provider value={{ openFolder, openNewFolder }}>

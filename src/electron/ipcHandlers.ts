@@ -17,16 +17,16 @@ export function setupIpcHandlers(mainWindow: BrowserWindow){
         }
     })
 
-    ipcMain.handle('select-folder', async () => {
-        const result = await dialog.showOpenDialog({ properties: ['openDirectory'] })
+    ipcMain.handle('select-folder', () => {
+        const result = dialog.showOpenDialogSync({ properties: ['openDirectory'] })
 
-        if (result.canceled || result.filePaths.length === 0) {
+        if (!result || result.length === 0) {
             return null
         }
 
-        const folderPath = result.filePaths[0]
+        const folderPath = result[0]
 
-        const structure = await readFolderStructure(folderPath)
+        const structure = readFolderStructure(folderPath)
 
         setSetting('lastOpenedFolder', folderPath)
 

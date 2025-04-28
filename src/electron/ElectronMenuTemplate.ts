@@ -1,9 +1,20 @@
-import { MenuItemConstructorOptions } from 'electron'
+import { BrowserWindow, MenuItemConstructorOptions } from 'electron'
 
 export const menuTemplate: MenuItemConstructorOptions[] = [
     {
         label: 'File',
         submenu: [
+            {
+                label: 'Open Folder',
+                accelerator: 'CmdOrCtrl+O',
+                click: () => {
+                    const focusedWindow = BrowserWindow.getFocusedWindow()
+                    if (focusedWindow) {
+                        focusedWindow.webContents.send('open-folder-dialog')
+                    }
+                }
+            },
+            { type: 'separator' },
             { role: 'quit', label: 'Exit' }
         ]
     },

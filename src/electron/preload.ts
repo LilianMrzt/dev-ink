@@ -14,5 +14,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     getLastOpenedFolder: () => {
         return ipcRenderer.invoke('get-last-opened-folder')
+    },
+    onOpenFolderDialog: (callback: () => void) => {
+        ipcRenderer.on('open-folder-dialog', callback)
     }
 })
