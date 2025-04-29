@@ -2,7 +2,7 @@
     position: absolute;
     inset: 0;
     margin: 0;
-    font-family: monospace;
+    font-family: inherit;
     font-size: 14px;
     line-height: 20px;
     background: transparent;
@@ -35,4 +35,6 @@
     white-space: pre;
     color: var(--text);
     text-align: start;
+    font-size: 14px;
+    line-height: 20px;
 }
