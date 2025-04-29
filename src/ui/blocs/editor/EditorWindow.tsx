@@ -10,6 +10,7 @@ export const EditorWindow = () => {
     const [code, setCode] = useState('')
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const highlightListRef = useRef<FixedSizeList | null>(null)
+    const outerHighlightRef = useRef<HTMLDivElement | null>(null)
 
     const {
         activeFile,
@@ -40,12 +41,14 @@ export const EditorWindow = () => {
                 <EditorHighlight
                     code={code}
                     highlightListRef={highlightListRef}
+                    outerHighlightRef={outerHighlightRef}
                 />
                 <EditorTextArea
                     code={code}
                     setCode={setCode}
                     textareaRef={textareaRef}
                     highlightListRef={highlightListRef}
+                    outerHighlightRef={outerHighlightRef}
                 />
             </div>
         </div>

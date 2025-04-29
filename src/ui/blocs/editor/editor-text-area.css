@@ -1,3 +1,10 @@
+.editor-textarea-wrapper {
+    position: absolute;
+    inset: 0;
+    padding-left: 60px;
+    overflow: hidden;
+}
+
 .editor-text-area {
     flex: 1;
     height: 100%;
@@ -12,7 +19,7 @@
     z-index: 50;
     white-space: pre;
     box-sizing: border-box;
-    overflow: visible;
+    overflow: scroll;
     color: transparent;
     scroll-behavior: smooth;
 }

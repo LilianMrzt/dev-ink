@@ -6,4 +6,5 @@ export interface EditorTextAreaProps {
     setCode: Dispatch<SetStateAction<string>>
     textareaRef: RefObject<HTMLTextAreaElement | null>
     highlightListRef: RefObject<FixedSizeList | null>
+    outerHighlightRef: RefObject<HTMLDivElement | null>
 }

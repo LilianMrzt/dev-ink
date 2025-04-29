@@ -1,5 +1,5 @@
 import React, { CSSProperties, FC, useMemo } from 'react'
-import { FixedSizeList as List } from 'react-window'
+import { FixedSizeList } from 'react-window'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-jsx'
@@ -33,7 +33,8 @@ const detectLanguage = (filename: string): string => {
 
 const EditorHighlight: FC<EditorHighlightProps> = ({
     code,
-    highlightListRef
+    highlightListRef,
+    outerHighlightRef
 }) => {
     const {
         activeFile
@@ -80,16 +81,17 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
             <AutoSizer>
                 {({ height, width }) => {
                     return (
-                        <List
+                        <FixedSizeList
                             ref={highlightListRef}
                             height={height}
                             width={width}
                             itemSize={20}
                             itemCount={lines.length}
-                            overscanCount={20}
+                            overscanCount={50}
+                            outerRef={outerHighlightRef}
                         >
                             {Row}
-                        </List>
+                        </FixedSizeList>
                     )
                 }}
             </AutoSizer>

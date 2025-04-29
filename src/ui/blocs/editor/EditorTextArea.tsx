@@ -10,7 +10,8 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
     setCode,
     code,
     textareaRef,
-    highlightListRef
+    highlightListRef,
+    outerHighlightRef
 }) => {
     const {
         activeFile,
@@ -53,10 +54,15 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      * Synchronise le scroll du textarea avec la colonne des numéros de ligne et le highlight.
      */
     const handleScroll = () => {
-        if (textareaRef.current && highlightListRef.current) {
-            const scrollTop = textareaRef.current?.scrollTop
-            if (typeof scrollTop === 'number') {
+        if (textareaRef.current && outerHighlightRef.current) {
+            if ('scrollTop' in textareaRef.current && 'scrollLeft' in textareaRef.current) {
+                const scrollTop = textareaRef.current.scrollTop
+                const scrollLeft = textareaRef.current.scrollLeft
+
                 highlightListRef.current?.scrollTo(scrollTop)
+                if ('scrollLeft' in outerHighlightRef.current) {
+                    outerHighlightRef.current.scrollLeft = scrollLeft
+                }
             }
         }
     }
@@ -69,15 +75,19 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
     }
 
     return (
-        <textarea
-            ref={textareaRef}
-            className={'editor-text-area'}
-            value={code}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-            onScroll={handleScroll}
-            spellCheck={false}
-        />
+        <div
+            className={'editor-textarea-wrapper'}
+        >
+            <textarea
+                ref={textareaRef}
+                className={'editor-text-area'}
+                value={code}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                onScroll={handleScroll}
+                spellCheck={false}
+            />
+        </div>
     )
 }
 
