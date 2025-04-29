@@ -33,8 +33,7 @@ const detectLanguage = (filename: string): string => {
 
 const EditorHighlight: FC<EditorHighlightProps> = ({
     code,
-    lineHeight,
-    highlightRef
+    highlightListRef
 }) => {
     const {
         activeFile
@@ -56,27 +55,38 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
 
         return (
             <div
-                style={style}
-                className={'highlight-line'}
-                dangerouslySetInnerHTML={{ __html: highlighted }}
-            />
+                style={{
+                    ...style
+                }}
+                className={'editor-row'}
+            >
+                <div
+                    className={'editor-line-number'}
+                >
+                    {index + 1}
+                </div>
+                <div
+                    className={'highlight-line'}
+                    dangerouslySetInnerHTML={{ __html: highlighted }}
+                />
+            </div>
         )
     }
 
     return (
         <div
             className={'editor-highlight'}
-            ref={highlightRef}
         >
             <AutoSizer>
                 {({ height, width }) => {
                     return (
                         <List
+                            ref={highlightListRef}
                             height={height}
                             width={width}
-                            itemSize={lineHeight}
+                            itemSize={20}
                             itemCount={lines.length}
-                            overscanCount={40}
+                            overscanCount={20}
                         >
                             {Row}
                         </List>

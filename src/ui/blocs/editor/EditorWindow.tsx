@@ -1,18 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
-import './editor-window.css'
-import EditorLineNumbers from '@ui/blocs/editor/EditorLineNumbers'
-import EditorTextArea from '@ui/blocs/editor/EditorTextArea'
-import { useEditor } from '@hooks/EditorContext'
+import React from 'react'
 import EditorHighlight from '@ui/blocs/editor/EditorHighlight'
-
-const LINE_HEIGHT = 20
+import EditorTextArea from '@ui/blocs/editor/EditorTextArea'
+import { useEffect, useRef, useState } from 'react'
+import { useEditor } from '@hooks/EditorContext'
+import './editor-window.css'
+import { FixedSizeList } from 'react-window'
 
 export const EditorWindow = () => {
     const [code, setCode] = useState('')
-    const containerRef = useRef<HTMLDivElement | null>(null)
-    const linesRef = useRef<HTMLDivElement | null>(null)
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
-    const highlightRef = useRef<HTMLDivElement | null>(null)
+    const highlightListRef = useRef<FixedSizeList | null>(null)
 
     const {
         activeFile,
@@ -25,7 +22,7 @@ export const EditorWindow = () => {
         }
     }, [activeFile])
 
-    if (openedFiles.length === 0 || !activeFile) {
+    if (openedFiles.length === 0) {
         return (
             <div className="editor-window empty">
                 No file opened.
@@ -35,27 +32,20 @@ export const EditorWindow = () => {
 
     return (
         <div
-            ref={containerRef}
             className={'editor-window'}
         >
-            <EditorLineNumbers
-                linesRef={linesRef}
-                code={code}
-            />
             <div
                 className={'editor-layer'}
             >
                 <EditorHighlight
                     code={code}
-                    lineHeight={LINE_HEIGHT}
-                    highlightRef={highlightRef}
+                    highlightListRef={highlightListRef}
                 />
                 <EditorTextArea
                     code={code}
                     setCode={setCode}
-                    linesRef={linesRef}
                     textareaRef={textareaRef}
-                    highlightRef={highlightRef}
+                    highlightListRef={highlightListRef}
                 />
             </div>
         </div>

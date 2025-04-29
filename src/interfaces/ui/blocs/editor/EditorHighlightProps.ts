@@ -1,7 +1,7 @@
 import { RefObject } from 'react'
+import { FixedSizeList } from 'react-window'
 
 export interface EditorHighlightProps {
     code: string;
-    lineHeight: number;
-    highlightRef: RefObject<HTMLDivElement | null>
+    highlightListRef: RefObject<FixedSizeList | null>
 }

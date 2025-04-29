@@ -1,9 +1,9 @@
 import { Dispatch, RefObject, SetStateAction } from 'react'
+import { FixedSizeList } from 'react-window'
 
 export interface EditorTextAreaProps {
     code: string
     setCode: Dispatch<SetStateAction<string>>
-    linesRef: RefObject<HTMLDivElement | null>
-    highlightRef: RefObject<HTMLDivElement | null>
     textareaRef: RefObject<HTMLTextAreaElement | null>
+    highlightListRef: RefObject<FixedSizeList | null>
 }
