@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import './editor-window.css'
 import EditorLineNumbers from '@ui/blocs/editor/EditorLineNumbers'
 import EditorTextArea from '@ui/blocs/editor/EditorTextArea'
-import EditorHighlight from '@ui/blocs/editor/EditorHighlight'
 import { useEditor } from '@hooks/EditorContext'
+import EditorHighlight from '@ui/blocs/editor/EditorHighlight'
+
+const LINE_HEIGHT = 20
 
 export const EditorWindow = () => {
     const [code, setCode] = useState('')
+    const containerRef = useRef<HTMLDivElement | null>(null)
     const linesRef = useRef<HTMLDivElement | null>(null)
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
-    const highlightRef = useRef<HTMLPreElement | null>(null)
+    const highlightRef = useRef<HTMLDivElement | null>(null)
 
     const {
         activeFile,
@@ -22,7 +25,7 @@ export const EditorWindow = () => {
         }
     }, [activeFile])
 
-    if (openedFiles.length === 0) {
+    if (openedFiles.length === 0 || !activeFile) {
         return (
             <div className="editor-window empty">
                 No file opened.
@@ -32,6 +35,7 @@ export const EditorWindow = () => {
 
     return (
         <div
+            ref={containerRef}
             className={'editor-window'}
         >
             <EditorLineNumbers
@@ -42,8 +46,9 @@ export const EditorWindow = () => {
                 className={'editor-layer'}
             >
                 <EditorHighlight
-                    highlightRef={highlightRef}
                     code={code}
+                    lineHeight={LINE_HEIGHT}
+                    highlightRef={highlightRef}
                 />
                 <EditorTextArea
                     code={code}
