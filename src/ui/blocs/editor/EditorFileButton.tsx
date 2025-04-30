@@ -50,6 +50,11 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
             >
                 {openedFile.name}
             </Text>
+            {openedFile.isModified && (
+                <div
+                    className={'editor-file-button-modified-indicator'}
+                />
+            )}
             {/** TODO: Creer composant réutilisable **/}
             <button
                 className={'editor-file-button-close'}
@@ -60,6 +65,7 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
             >
                 <Icon
                     color={theme.text}
+                    size={12}
                 >
                     <CloseIcon/>
                 </Icon>

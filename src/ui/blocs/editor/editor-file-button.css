@@ -9,10 +9,23 @@
     gap: 8px;
 }
 
+.editor-file-button-modified-indicator {
+    background-color: var(--text);
+    height: 8px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
 .editor-file-button-close {
     border: none;
     background-color: transparent;
-    padding: 0;
+    padding: 2px;
     margin: 0;
     cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.editor-file-button-close:hover {
+    background-color: var(--primary);
 }

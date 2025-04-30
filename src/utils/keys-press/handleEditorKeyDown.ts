@@ -17,6 +17,7 @@ import { handleSave } from '@utils/keys-press/HandleSave'
  * @param onChange
  * @param fileId
  * @param history
+ * @param markFileAsSaved
  */
 export const handleEditorKeyDown = (
     e: KeyboardEvent<HTMLTextAreaElement>,
@@ -25,7 +26,8 @@ export const handleEditorKeyDown = (
     setCode: Dispatch<SetStateAction<string>>,
     onChange: (id: string, value: string) => void,
     fileId: string,
-    history: HistoryState
+    history: HistoryState,
+    markFileAsSaved: (id: string) => void
 ) => {
     if (!textarea) return
 
@@ -36,7 +38,10 @@ export const handleEditorKeyDown = (
 
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault()
-        void handleSave(code, fileId)
+        handleSave(code, fileId)
+            .then(() => {
+                markFileAsSaved(fileId)
+            })
         return
     }
 

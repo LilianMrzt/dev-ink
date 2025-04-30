@@ -3,4 +3,5 @@ export interface File {
     path: string;
     name: string;
     content: string;
+    isModified?: boolean
 }

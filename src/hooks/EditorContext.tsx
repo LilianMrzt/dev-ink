@@ -9,6 +9,7 @@ interface EditorContextProps {
     handleActiveFileChange: (id: string, newValue: string | undefined) => void
     openFile: (file: File) => void
     closeFile: (fileId: string) => void
+    markFileAsSaved: (fileId: string) => void
     activeFile: File
 }
 
@@ -31,9 +32,11 @@ export const EditorProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const handleActiveFileChange = (id: string, newValue: string | undefined) => {
         setOpenedFiles((prev) => {
             return prev.map((file) => {
+                const isModified = file.content !== newValue
                 return (file.id === id ? {
                     ...file,
-                    content: newValue || ''
+                    content: newValue || '',
+                    isModified
                 } : file)
             })
         })
@@ -81,6 +84,15 @@ export const EditorProvider: FC<{ children: ReactNode }> = ({ children }) => {
         })
     }
 
+    const markFileAsSaved = (id: string) => {
+        setOpenedFiles((prev) => {
+            return prev.map((file) => {
+                if (file.id !== id) return file
+                return { ...file, isModified: false }
+            })
+        })
+    }
+
     return (
         <EditorContext.Provider
             value={{
@@ -91,7 +103,8 @@ export const EditorProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 handleActiveFileChange,
                 openFile,
                 closeFile,
-                activeFile
+                activeFile,
+                markFileAsSaved
             }}
         >
             {children}

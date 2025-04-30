@@ -16,7 +16,8 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
 }) => {
     const {
         activeFile,
-        handleActiveFileChange
+        handleActiveFileChange,
+        markFileAsSaved
     } = useEditor()
 
     const historyRef = useRef<HistoryState>(createHistory())
@@ -74,7 +75,16 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      * Gestion de la pression des touches du clavier
      */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        handleEditorKeyDown(e, activeFile.content, textareaRef.current, setCode, handleActiveFileChange, activeFile.path, historyRef.current)
+        handleEditorKeyDown(
+            e,
+            activeFile.content,
+            textareaRef.current,
+            setCode,
+            handleActiveFileChange,
+            activeFile.path,
+            historyRef.current,
+            markFileAsSaved
+        )
     }
 
     return (
