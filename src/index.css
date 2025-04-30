@@ -26,3 +26,22 @@ code {
 body.theme-changing * {
   transition: none !important;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primaryHover);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
