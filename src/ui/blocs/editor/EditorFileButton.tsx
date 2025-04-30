@@ -23,8 +23,9 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
         : isHovered ? theme.background : theme.primary
 
     return (
-        <button
+        <div
             className={'editor-file-button'}
+            role={'button'}
             onClick={() => {
                 return setActiveId(openedFile.id)
             }}
@@ -63,7 +64,7 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
                     <CloseIcon/>
                 </Icon>
             </button>
-        </button>
+        </div>
     )
 }
 
