@@ -22,11 +22,12 @@
     z-index: 50;
     white-space: pre;
     box-sizing: border-box;
-    overflow: scroll;
     color: transparent;
     scroll-behavior: smooth;
     width: 100%;
     margin: 0;
-    padding: 0 0 200px;
+    padding: 0 0 192px;
+    overflow-x: auto;
+    overflow-y: scroll;
 }
 
