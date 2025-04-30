@@ -60,6 +60,17 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
         index: number
         style: CSSProperties
     }) => {
+        if (index === lines.length) {
+            return (
+                <div
+                    style={{
+                        ...style,
+                        height: 200
+                    }}
+                />
+            )
+        }
+
         const line = lines[index]
         const highlighted = grammar ? Prism.highlight(line, grammar, language) : line
 
@@ -98,7 +109,7 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
                             height={height}
                             width={width}
                             itemSize={20}
-                            itemCount={lines.length}
+                            itemCount={lines.length + 1}
                             overscanCount={50}
                             outerRef={outerHighlightRef}
                             className={'highlight-fixed-list'}
