@@ -11,7 +11,8 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
     code,
     textareaRef,
     highlightListRef,
-    outerHighlightRef
+    outerHighlightRef,
+    lineNumberListRef
 }) => {
     const {
         activeFile,
@@ -60,6 +61,8 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
                 const scrollLeft = textareaRef.current.scrollLeft
 
                 highlightListRef.current?.scrollTo(scrollTop)
+                lineNumberListRef.current?.scrollTo(scrollTop)
+
                 if ('scrollLeft' in outerHighlightRef.current) {
                     outerHighlightRef.current.scrollLeft = scrollLeft
                 }

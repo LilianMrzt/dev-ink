@@ -76,24 +76,13 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
 
         return (
             <div
+                className={'highlight-line'}
                 style={{
-                    ...style
+                    ...style,
+                    minWidth: highlightContentWidth
                 }}
-                className={'editor-row'}
-            >
-                <div
-                    className={'editor-line-number'}
-                >
-                    {index + 1}
-                </div>
-                <div
-                    className={'highlight-line'}
-                    style={{
-                        minWidth: highlightContentWidth
-                    }}
-                    dangerouslySetInnerHTML={{ __html: highlighted }}
-                />
-            </div>
+                dangerouslySetInnerHTML={{ __html: highlighted }}
+            />
         )
     }
 
@@ -110,7 +99,6 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
                             width={width}
                             itemSize={20}
                             itemCount={lines.length + 1}
-                            overscanCount={50}
                             outerRef={outerHighlightRef}
                             className={'highlight-fixed-list'}
                         >

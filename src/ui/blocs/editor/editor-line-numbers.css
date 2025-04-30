@@ -1,0 +1,19 @@
+.editor-line-numbers {
+    width: 60px;
+    background: var(--secondary);
+    user-select: none;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: inherit;
+    z-index: 30;
+    overflow: hidden;
+}
+
+.line-number {
+    width: 100%;
+    text-align: right;
+    padding-right: 8px;
+    color: var(--textSecondary);
+    box-sizing: border-box;
+    overflow: hidden;
+}

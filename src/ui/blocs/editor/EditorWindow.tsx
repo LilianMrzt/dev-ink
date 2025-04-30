@@ -5,11 +5,13 @@ import { useEffect, useRef, useState } from 'react'
 import { useEditor } from '@hooks/EditorContext'
 import './editor-window.css'
 import { FixedSizeList } from 'react-window'
+import EditorLineNumbers from '@ui/blocs/editor/EditorLineNumbers'
 
 export const EditorWindow = () => {
     const [code, setCode] = useState('')
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const highlightListRef = useRef<FixedSizeList | null>(null)
+    const lineNumbersListRef = useRef<FixedSizeList | null>(null)
     const outerHighlightRef = useRef<HTMLDivElement | null>(null)
 
     const {
@@ -35,6 +37,10 @@ export const EditorWindow = () => {
         <div
             className={'editor-window'}
         >
+            <EditorLineNumbers
+                code={code}
+                listRef={lineNumbersListRef}
+            />
             <div
                 className={'editor-layer'}
             >
@@ -49,6 +55,7 @@ export const EditorWindow = () => {
                     textareaRef={textareaRef}
                     highlightListRef={highlightListRef}
                     outerHighlightRef={outerHighlightRef}
+                    lineNumberListRef={lineNumbersListRef}
                 />
             </div>
         </div>

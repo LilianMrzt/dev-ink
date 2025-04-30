@@ -7,4 +7,5 @@ export interface EditorTextAreaProps {
     textareaRef: RefObject<HTMLTextAreaElement | null>
     highlightListRef: RefObject<FixedSizeList | null>
     outerHighlightRef: RefObject<HTMLDivElement | null>
+    lineNumberListRef: RefObject<FixedSizeList | null>
 }
