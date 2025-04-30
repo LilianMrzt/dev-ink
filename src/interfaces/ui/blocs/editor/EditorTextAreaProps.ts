@@ -8,4 +8,5 @@ export interface EditorTextAreaProps {
     highlightListRef: RefObject<FixedSizeList | null>
     outerHighlightRef: RefObject<HTMLDivElement | null>
     lineNumberListRef: RefObject<FixedSizeList | null>
+    setActiveLineIndex: Dispatch<SetStateAction<number>>
 }

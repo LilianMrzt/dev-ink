@@ -13,6 +13,7 @@ export const EditorWindow = () => {
     const highlightListRef = useRef<FixedSizeList | null>(null)
     const lineNumbersListRef = useRef<FixedSizeList | null>(null)
     const outerHighlightRef = useRef<HTMLDivElement | null>(null)
+    const [activeLineIndex, setActiveLineIndex] = useState<number>(0)
 
     const {
         activeFile,
@@ -48,6 +49,7 @@ export const EditorWindow = () => {
                     code={code}
                     highlightListRef={highlightListRef}
                     outerHighlightRef={outerHighlightRef}
+                    activeLineIndex={activeLineIndex}
                 />
                 <EditorTextArea
                     code={code}
@@ -56,6 +58,7 @@ export const EditorWindow = () => {
                     highlightListRef={highlightListRef}
                     outerHighlightRef={outerHighlightRef}
                     lineNumberListRef={lineNumbersListRef}
+                    setActiveLineIndex={setActiveLineIndex}
                 />
             </div>
         </div>

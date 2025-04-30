@@ -34,7 +34,8 @@ const detectLanguage = (filename: string): string => {
 const EditorHighlight: FC<EditorHighlightProps> = ({
     code,
     highlightListRef,
-    outerHighlightRef
+    outerHighlightRef,
+    activeLineIndex
 }) => {
     const {
         activeFile
@@ -74,9 +75,11 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
         const line = lines[index]
         const highlighted = grammar ? Prism.highlight(line, grammar, language) : line
 
+        const isActive = index === activeLineIndex
+
         return (
             <div
-                className={'highlight-line'}
+                className={`highlight-line ${isActive ? 'active' : ''}`}
                 style={{
                     ...style,
                     minWidth: highlightContentWidth

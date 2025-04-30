@@ -12,7 +12,8 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
     textareaRef,
     highlightListRef,
     outerHighlightRef,
-    lineNumberListRef
+    lineNumberListRef,
+    setActiveLineIndex
 }) => {
     const {
         activeFile,
@@ -33,7 +34,7 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      */
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newValue = e.target.value
-
+        updateActiveLine()
         if (textareaRef.current) {
             if ('selectionStart' in textareaRef.current) {
                 const cursor = textareaRef.current.selectionStart
@@ -75,6 +76,7 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      * Gestion de la pression des touches du clavier
      */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        updateActiveLine()
         handleEditorKeyDown(
             e,
             activeFile.content,
@@ -85,6 +87,20 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
             historyRef.current,
             markFileAsSaved
         )
+    }
+
+    /**
+     * Met à jour la ligne active du textarea
+     */
+    const updateActiveLine = () => {
+        requestAnimationFrame(() => {
+            if (textareaRef.current) {
+                const cursor = textareaRef.current?.selectionStart
+                const text = textareaRef.current?.value
+                const line = text?.slice(0, cursor).split('\n').length - 1
+                setActiveLineIndex(line)
+            }
+        })
     }
 
     return (
@@ -98,6 +114,7 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 onScroll={handleScroll}
+                onMouseDown={updateActiveLine}
                 spellCheck={false}
             />
         </div>

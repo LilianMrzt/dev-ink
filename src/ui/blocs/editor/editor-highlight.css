@@ -21,6 +21,11 @@
     line-height: 20px;
     width: 100%;
     pointer-events: none;
+    background-color: transparent;
+}
+
+.highlight-line.active {
+    background-color: var(--backgroundHover);
 }
 
 .highlight-fixed-list::-webkit-scrollbar {
