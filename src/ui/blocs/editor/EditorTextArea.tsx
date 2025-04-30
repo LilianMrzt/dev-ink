@@ -74,7 +74,7 @@ const EditorTextArea: FC<EditorTextAreaProps> = ({
      * Gestion de la pression des touches du clavier
      */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        handleEditorKeyDown(e, code, textareaRef.current, setCode, handleActiveFileChange, activeFile.id, historyRef.current)
+        handleEditorKeyDown(e, activeFile.content, textareaRef.current, setCode, handleActiveFileChange, activeFile.path, historyRef.current)
     }
 
     return (

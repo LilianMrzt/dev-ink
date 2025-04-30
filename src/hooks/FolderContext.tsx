@@ -13,6 +13,7 @@ export const FolderProvider = ({ children }: { children: ReactNode }) => {
     const [openFolder, setOpenFolder] = useState<{ folderPath: string; structure: FolderEntry[] } | null>(null)
 
     const { isMac } = useWindowState()
+
     /**
      * Ouvrir un nouveau dossier dans le drawer
      */

@@ -35,11 +35,16 @@ export function setupIpcHandlers(mainWindow: BrowserWindow){
 
     ipcMain.handle('get-last-opened-folder', async () => {
         const lastFolder = getSetting('lastOpenedFolder')
-        if (lastFolder && fs.existsSync(lastFolder)) {
-            const structure = await readFolderStructure(lastFolder)
-            return { folderPath: lastFolder, structure }
+
+        if (!lastFolder || !fs.existsSync(lastFolder)) {
+            return null
         }
-        return null
+
+        const structure = readFolderStructure(lastFolder)
+
+        setSetting('lastOpenedFolder', lastFolder)
+
+        return { folderPath: lastFolder, structure }
     })
 
     ipcMain.handle('read-file', async (_event, filePath: string) => {
@@ -51,4 +56,15 @@ export function setupIpcHandlers(mainWindow: BrowserWindow){
         }
     })
 
+    ipcMain.handle('write-file', async (_event, filePath: string, content: string) => {
+        try {
+            fs.writeFileSync(filePath, content, 'utf-8')
+            return { success: true }
+        } catch (error: unknown) {
+            console.error('Failed to write file:', filePath, error)
+            const errorMessage = error instanceof Error ? error.message : String(error)
+            return { success: false, error: errorMessage }
+        }
+
+    })
 }

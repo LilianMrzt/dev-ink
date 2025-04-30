@@ -20,5 +20,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     readFile: (filePath: string) => {
         return ipcRenderer.invoke('read-file', filePath)
+    },
+    writeFile: (filePath: string, content: string) => {
+        return ipcRenderer.invoke('write-file', filePath, content)
     }
 })

@@ -10,7 +10,8 @@ declare global {
             selectFolder: () => Promise<{ folderPath: string, structure: FolderEntry[] } | null>,
             getLastOpenedFolder: () => Promise<{ folderPath: string; structure: FolderEntry[] } | null>,
             onOpenFolderDialog: (callback: () => void) => void,
-            readFile: (filePath: string) => Promise<string>
+            readFile: (filePath: string) => Promise<string>,
+            writeFile: (filePath: string, content: string) => Promise<{ success: boolean; error?: string }>,
         }
     }
 }
