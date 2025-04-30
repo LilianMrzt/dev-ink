@@ -5,6 +5,8 @@ import { ReactComponent as FileIcon } from '@resources/assets/FileIcon.svg'
 import { ReactComponent as ChevronDownIcon } from '@resources/assets/ChevronDownIcon.svg'
 import { ReactComponent as ChevronRightIcon } from '@resources/assets/ChevronRightIcon.svg'
 import { ReactComponent as CloseIcon } from '@resources/assets/CloseIcon.svg'
+import { ReactComponent as NewFolderIcon } from '@resources/assets/NewFolderIcon.svg'
+import { ReactComponent as NewFileIcon } from '@resources/assets/NewFileIcon.svg'
 
 export {
     FolderOpenIcon,
@@ -13,5 +15,7 @@ export {
     FileIcon,
     ChevronDownIcon,
     ChevronRightIcon,
-    CloseIcon
+    CloseIcon,
+    NewFolderIcon,
+    NewFileIcon
 }

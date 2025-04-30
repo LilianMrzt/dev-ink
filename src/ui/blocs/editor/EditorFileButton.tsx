@@ -7,6 +7,7 @@ import Icon from '@components/resources/Icon'
 import { CloseIcon, FileIcon } from '@resources/Icons'
 import { useEditor } from '@hooks/EditorContext'
 import { filesIconColor } from '@constants/filesIcons'
+import IconButton from '@components/buttons/IconButton'
 
 const EditorFileButton: FC<EditorFileButtonProps> = ({
     openedFile,
@@ -55,21 +56,14 @@ const EditorFileButton: FC<EditorFileButtonProps> = ({
                     className={'editor-file-button-modified-indicator'}
                 />
             )}
-            {/** TODO: Creer composant réutilisable **/}
-            <button
+            <IconButton
                 className={'editor-file-button-close'}
-                onClick={(event) => {
-                    event.stopPropagation()
+                onClick={() => {
                     closeFile(openedFile.id)
                 }}
             >
-                <Icon
-                    color={theme.text}
-                    size={12}
-                >
-                    <CloseIcon/>
-                </Icon>
-            </button>
+                <CloseIcon/>
+            </IconButton>
         </div>
     )
 }

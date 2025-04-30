@@ -3,6 +3,7 @@ import ResizableDrawer from '@ui/blocs/side-menu/ResizableDrawer'
 import { useFolder } from '@hooks/FolderContext'
 import ProjectDrawerFolderItem from '@ui/blocs/drawers/project-drawer/ProjectDrawerFolderItem'
 import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolderFileItem'
+import ProjectDrawerTopBar from '@ui/blocs/drawers/project-drawer/ProjectDrawerTopBar'
 
 const ProjectDrawer = (): ReactNode => {
     const { openFolder } = useFolder()
@@ -17,6 +18,7 @@ const ProjectDrawer = (): ReactNode => {
         <ResizableDrawer
             storageKey={'ProjectDrawerStorageKey'}
         >
+            <ProjectDrawerTopBar/>
             {openFolder?.structure.map((item) => {
                 return (
                     item.isDirectory

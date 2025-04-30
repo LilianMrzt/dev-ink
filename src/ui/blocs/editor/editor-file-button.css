@@ -17,12 +17,7 @@
 }
 
 .editor-file-button-close {
-    border: none;
-    background-color: transparent;
     padding: 2px;
-    margin: 0;
-    cursor: pointer;
-    box-sizing: border-box;
     border-radius: 50%;
 }
 
