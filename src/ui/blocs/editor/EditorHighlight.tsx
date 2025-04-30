@@ -47,6 +47,15 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
     }, [code])
     const grammar = Prism.languages[language]
 
+    const maxLineLength = useMemo(() => {
+        return Math.max(...lines.map((line) => {
+            return line.length
+        }))
+    }, [lines])
+
+    const estimatedCharWidth = 8.4
+    const highlightContentWidth = maxLineLength * estimatedCharWidth
+
     const Row = ({ index, style }: {
         index: number
         style: CSSProperties
@@ -68,6 +77,9 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
                 </div>
                 <div
                     className={'highlight-line'}
+                    style={{
+                        minWidth: highlightContentWidth
+                    }}
                     dangerouslySetInnerHTML={{ __html: highlighted }}
                 />
             </div>
@@ -89,6 +101,7 @@ const EditorHighlight: FC<EditorHighlightProps> = ({
                             itemCount={lines.length}
                             overscanCount={50}
                             outerRef={outerHighlightRef}
+                            className={'highlight-fixed-list'}
                         >
                             {Row}
                         </FixedSizeList>

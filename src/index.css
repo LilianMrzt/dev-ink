@@ -40,6 +40,7 @@ body.theme-changing * {
 ::-webkit-scrollbar-thumb {
   background-color: var(--primaryHover);
   border-radius: 10px;
+  cursor: default;
 }
 
 ::-webkit-scrollbar-corner {
