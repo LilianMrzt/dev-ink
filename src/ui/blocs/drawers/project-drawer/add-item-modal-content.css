@@ -1,0 +1,25 @@
+.add-item-modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-item-modal-content-title {
+    height: 30px;
+    background-color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-item-modal-content-input {
+    background-color: var(--primary);
+    padding: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    height: 30px;
+    color: var(--text);
+    font-family: "JetBrains Mono", sans-serif;
+    font-size: 13px;
+}
