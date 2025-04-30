@@ -19,7 +19,7 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
         openFile
     } = useEditor()
 
-    const isActive = activeItem === item.path
+    const isActive = activeItem?.path === item.path
 
     return (
         <div
@@ -28,10 +28,10 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
                 paddingLeft: (depth + 1) * 20
             }}
             onClick={() => {
-                setActiveItem(item.path)
+                setActiveItem(item)
             }}
             onDoubleClick={async () => {
-                setActiveItem(item.path)
+                setActiveItem(item)
 
                 if (!item.isDirectory) {
                     const content = await window.electronAPI?.readFile(item.path) || ''

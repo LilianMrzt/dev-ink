@@ -15,7 +15,7 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
 }) => {
     const { theme } = useTheme()
 
-    const isActive = activeItem === item.path
+    const isActive = activeItem?.path === item.path
 
     const [showChildren, setShowChildren] = useState(false)
 
@@ -27,7 +27,7 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
                     paddingLeft: depth * 20
                 }}
                 onClick={() => {
-                    setActiveItem(item.path)
+                    setActiveItem(item)
                 }}
                 onDoubleClick={() => {
                     setShowChildren(!showChildren)

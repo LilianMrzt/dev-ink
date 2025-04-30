@@ -1,10 +1,11 @@
-import React, { createContext, type ReactNode, useContext, useEffect, useState } from 'react'
+import React, { createContext, Dispatch, type ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
 import { FolderEntry } from '@interfaces/types/FolderEntry'
 import { useWindowState } from '@hooks/useWindowState'
 
 interface FolderContextProps {
     openFolder: { folderPath: string; structure: FolderEntry[] } | null;
     openNewFolder: () => Promise<void>;
+    setOpenFolder: Dispatch<SetStateAction<{ folderPath: string; structure: FolderEntry[] } | null>>;
 }
 
 const FolderContext = createContext<FolderContextProps | undefined>(undefined)
@@ -46,7 +47,11 @@ export const FolderProvider = ({ children }: { children: ReactNode }) => {
     }, [isMac])
 
     return (
-        <FolderContext.Provider value={{ openFolder, openNewFolder }}>
+        <FolderContext.Provider value={{
+            openFolder,
+            openNewFolder,
+            setOpenFolder
+        }}>
             {children}
         </FolderContext.Provider>
     )

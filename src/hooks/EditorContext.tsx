@@ -84,6 +84,10 @@ export const EditorProvider: FC<{ children: ReactNode }> = ({ children }) => {
         })
     }
 
+    /**
+     * Marque un fichier modifié comme etant sauvegardé
+     * @param id
+     */
     const markFileAsSaved = (id: string) => {
         setOpenedFiles((prev) => {
             return prev.map((file) => {

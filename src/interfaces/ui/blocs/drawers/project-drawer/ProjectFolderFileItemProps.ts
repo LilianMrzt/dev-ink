@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react'
 
 export interface ProjectFolderFileItemProps {
     item: FolderEntry
-    activeItem: string | null
-    setActiveItem: Dispatch<SetStateAction<string | null>>
+    activeItem: FolderEntry | null
+    setActiveItem: Dispatch<SetStateAction<FolderEntry | null>>
     depth?: number;
 }

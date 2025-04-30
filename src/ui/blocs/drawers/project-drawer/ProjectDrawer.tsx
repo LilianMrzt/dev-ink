@@ -4,11 +4,12 @@ import { useFolder } from '@hooks/FolderContext'
 import ProjectDrawerFolderItem from '@ui/blocs/drawers/project-drawer/ProjectDrawerFolderItem'
 import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolderFileItem'
 import ProjectDrawerTopBar from '@ui/blocs/drawers/project-drawer/ProjectDrawerTopBar'
+import { FolderEntry } from '@interfaces/types/FolderEntry'
 
 const ProjectDrawer = (): ReactNode => {
     const { openFolder } = useFolder()
 
-    const [activeItem, setActiveItem] = useState<string | null>(null)
+    const [activeItem, setActiveItem] = useState<FolderEntry | null>(null)
 
     if (!openFolder) {
         return null
@@ -18,7 +19,9 @@ const ProjectDrawer = (): ReactNode => {
         <ResizableDrawer
             storageKey={'ProjectDrawerStorageKey'}
         >
-            <ProjectDrawerTopBar/>
+            <ProjectDrawerTopBar
+                activeItem={activeItem}
+            />
             {openFolder?.structure.map((item) => {
                 return (
                     item.isDirectory

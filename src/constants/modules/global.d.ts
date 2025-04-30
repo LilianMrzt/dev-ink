@@ -12,6 +12,8 @@ declare global {
             onOpenFolderDialog: (callback: () => void) => void,
             readFile: (filePath: string) => Promise<string>,
             writeFile: (filePath: string, content: string) => Promise<{ success: boolean; error?: string }>,
+            createFile: (filePath: string) => Promise<{ success: boolean; error?: string }>,
+            createFolder: (folderPath: string) => Promise<{ success: boolean; error?: string }>,
         }
     }
 }

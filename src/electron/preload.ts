@@ -23,5 +23,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     writeFile: (filePath: string, content: string) => {
         return ipcRenderer.invoke('write-file', filePath, content)
+    },
+    createFile: (filePath: string) => {
+        return ipcRenderer.invoke('create-file', filePath)
+    },
+    createFolder: (folderPath: string) => {
+        return ipcRenderer.invoke('create-folder', folderPath)
     }
 })

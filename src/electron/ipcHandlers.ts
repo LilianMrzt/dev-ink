@@ -65,6 +65,26 @@ export function setupIpcHandlers(mainWindow: BrowserWindow){
             const errorMessage = error instanceof Error ? error.message : String(error)
             return { success: false, error: errorMessage }
         }
-
     })
+
+    ipcMain.handle('create-file', async (_event, filePath: string) => {
+        try {
+            fs.writeFileSync(filePath, '')
+            return { success: true }
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error)
+            return { success: false, error: msg }
+        }
+    })
+
+    ipcMain.handle('create-folder', async (_event, folderPath: string) => {
+        try {
+            fs.mkdirSync(folderPath, { recursive: true })
+            return { success: true }
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error)
+            return { success: false, error: msg }
+        }
+    })
+
 }
