@@ -1,25 +1,27 @@
 .add-item-modal-content {
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--outline);
 }
 
 .add-item-modal-content-title {
     height: 30px;
-    background-color: var(--secondary);
+    background-color: var(--primaryHover);
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid var(--outline);
 }
 
 .add-item-modal-content-input {
     background-color: var(--primary);
-    padding: 4px;
+    padding: 4px 8px;
     width: 100%;
     box-sizing: border-box;
     border: none;
     outline: none;
     height: 30px;
     color: var(--text);
-    font-family: "JetBrains Mono", sans-serif;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
 }

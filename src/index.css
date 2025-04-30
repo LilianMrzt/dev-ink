@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "JetBrains Mono", sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--primary);
@@ -8,7 +8,7 @@ body {
 }
 
 code {
-  font-family: "JetBrains Mono", sans-serif;
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 :root {

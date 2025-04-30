@@ -8,6 +8,7 @@
     z-index: 999999;
     width: 100vw;
     height: 100vh;
+    pointer-events: none;
 }
 
 .modal-content {
@@ -19,4 +20,5 @@
     transform: translate(-50%, -50%);
     background-color: var(--primary);
     box-shadow: rgba(0, 0, 0, 0.25) 0 25px 50px -12px;
+    pointer-events: all;
 }

@@ -4,7 +4,7 @@ export const DefaultTheme = {
     secondary: '#313336',
     tertiary: '#a58fff',
     background: '#2b2b2b',
-    text: '#FFFFFF',
+    text: '#B8B8B8',
     textSecondary: '#939588',
     outline: '#505051'
 }
