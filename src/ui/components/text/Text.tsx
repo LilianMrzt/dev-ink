@@ -6,16 +6,21 @@ import { useTheme } from '@hooks/ThemeContext'
 const Text: FC<TextProps> = ({
     children,
     fontSize,
-    color
+    color,
+    wrap,
+    textAlign,
+    width
 }) => {
     const { theme } = useTheme()
 
     return (
         <p
-            className={'text'}
+            className={`text ${wrap ? 'wrap' : ''}`}
             style={{
                 fontSize: fontSize ?? 13,
-                color: color ?? theme.text
+                color: color ?? theme.text,
+                textAlign: textAlign ?? 'center',
+                width: width ?? 'fit-content'
             }}
         >
             {children}

@@ -3,8 +3,10 @@
     padding: 0;
     transition: color 0.2s ease-in-out, width 0.2s ease-in-out;
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: fit-content;
-    text-align: center;
     white-space: nowrap;
     user-select: none;
+}
+
+.text.wrap {
+    white-space: wrap;
 }

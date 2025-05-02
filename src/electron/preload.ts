@@ -29,5 +29,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     createFolder: (folderPath: string) => {
         return ipcRenderer.invoke('create-folder', folderPath)
+    },
+    deletePath: (path: string) => {
+        return ipcRenderer.invoke('delete-path', path)
     }
 })

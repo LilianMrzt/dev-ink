@@ -2,7 +2,7 @@ export const DefaultTheme = {
     primary: '#3c3f41',
     primaryHover: '#56595a',
     secondary: '#313336',
-    tertiary: '#a58fff',
+    tertiary: '#5783db',
     background: '#2b2b2b',
     backgroundHover: '#323232',
     text: '#B8B8B8',

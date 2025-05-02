@@ -5,8 +5,8 @@ import { ProjectDrawerFloatingMenuProps } from '@interfaces/ui/blocs/menus/Proje
 import { useFolder } from '@hooks/FolderContext'
 import { useEditor } from '@hooks/EditorContext'
 import Modal from '@components/layout/Modal'
-import AddItemModalContent from '@ui/blocs/drawers/project-drawer/AddItemModalContent'
-import { handleCreateFolderOrFile } from '@utils/fileOrFolderCreationUtils'
+import AddItemModalContent from '@ui/blocs/modals/AddItemModalContent'
+import { handleCreateFolderOrFile } from '@utils/fs-common/fileOrFolderCreationUtils'
 
 const ProjectDrawerFloatingMenu: FC<ProjectDrawerFloatingMenuProps> = ({
     isVisible,

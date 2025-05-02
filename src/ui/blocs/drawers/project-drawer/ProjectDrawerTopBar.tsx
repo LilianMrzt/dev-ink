@@ -3,11 +3,11 @@ import './project-drawer-top-bar.css'
 import IconButton from '@components/buttons/IconButton'
 import { NewFileIcon, NewFolderIcon } from '@resources/Icons'
 import Modal from '@components/layout/Modal'
-import AddItemModalContent from '@ui/blocs/drawers/project-drawer/AddItemModalContent'
+import AddItemModalContent from '@ui/blocs/modals/AddItemModalContent'
 import { useFolder } from '@hooks/FolderContext'
 import { useEditor } from '@hooks/EditorContext'
 import { ProjectDrawerTopBarProps } from '@interfaces/ui/blocs/drawers/project-drawer/ProjectDrawerTopBarProps'
-import { handleCreateFolderOrFile } from '@utils/fileOrFolderCreationUtils'
+import { handleCreateFolderOrFile } from '@utils/fs-common/fileOrFolderCreationUtils'
 
 const ProjectDrawerTopBar: FC<ProjectDrawerTopBarProps> = ({
     activeItem

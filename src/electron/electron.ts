@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as url from 'url'
 import { setupMenu } from './menu/menu'
 import { loadSettings } from './settings'
-import { setupIpcHandlers } from '@src/electron/ipc'
+import { setupIpcHandlers } from './ipc'
 
 let mainWindow: BrowserWindow | null = null
 
