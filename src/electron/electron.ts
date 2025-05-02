@@ -1,9 +1,9 @@
 import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
-import { setupIpcHandlers } from './ipcHandlers'
 import { setupMenu } from './menu'
 import { loadSettings } from './settings'
+import { setupIpcHandlers } from '@src/electron/ipc'
 
 let mainWindow: BrowserWindow | null = null
 
