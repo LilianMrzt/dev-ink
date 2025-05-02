@@ -7,7 +7,7 @@ import AddItemModalContent from '@ui/blocs/drawers/project-drawer/AddItemModalCo
 import { useFolder } from '@hooks/FolderContext'
 import { useEditor } from '@hooks/EditorContext'
 import { ProjectDrawerTopBarProps } from '@interfaces/ui/blocs/drawers/project-drawer/ProjectDrawerTopBarProps'
-import { getTargetDir, isValidName, normalizePath, sanitizeName } from '@utils/fileCreationUtils'
+import { handleCreateFolderOrFile } from '@utils/fileOrFolderCreationUtils'
 
 const ProjectDrawerTopBar: FC<ProjectDrawerTopBarProps> = ({
     activeItem
@@ -22,52 +22,18 @@ const ProjectDrawerTopBar: FC<ProjectDrawerTopBarProps> = ({
     const [isFolderCreationModalOpen, setIsFolderCreationModalOpen] = useState(false)
     const [isFileCreationModalOpen, setIsFileCreationModalOpen] = useState(false)
 
-    /**
-     * Crée un fichier ou dossier dans le répertoire de l'element actif du drawer
-     * @param name
-     * @param type
-     */
-    const handleCreate = async (name: string, type: 'file' | 'folder') => {
-        if (!openFolder || !activeItem) return
-
-        const cleanName = sanitizeName(name, type)
-        if (!isValidName(cleanName, type)) {
-            console.warn('Nom invalide.')
-            return
-        }
-
-        const fullPath = normalizePath(`${getTargetDir(activeItem)}/${cleanName}`)
-
-        const exists = openFolder.structure.some((entry) => {
-            return entry.path === fullPath
-        })
-        if (exists) {
-            console.warn('Un élément existe déjà à cet emplacement.')
-            return
-        }
-
-        const result =
-            type === 'file'
-                ? await window.electronAPI?.createFile(fullPath)
-                : await window.electronAPI?.createFolder(fullPath)
-
-        if (result?.success) {
-            const refreshed = await window.electronAPI?.getLastOpenedFolder()
-            if (refreshed) {
-                setOpenFolder(await refreshed)
-
-                if (type === 'file') {
-                    const content = await window.electronAPI?.readFile(fullPath) ?? ''
-                    openFile({
-                        id: fullPath,
-                        name: cleanName,
-                        path: fullPath,
-                        content,
-                        isModified: false
-                    })
-                }
-            }
-        }
+    const handleSubmit = (
+        name: string,
+        type: 'file' | 'folder'
+    ) => {
+        void handleCreateFolderOrFile(
+            name,
+            type,
+            openFolder,
+            activeItem,
+            setOpenFolder,
+            openFile
+        )
     }
 
     return (
@@ -103,7 +69,7 @@ const ProjectDrawerTopBar: FC<ProjectDrawerTopBarProps> = ({
                 <AddItemModalContent
                     label={'New folder'}
                     onSubmit={(name) => {
-                        void handleCreate(name, 'folder')
+                        void handleSubmit(name, 'folder')
                     }}
                     onClose={() => {
                         setIsFolderCreationModalOpen(false)
@@ -117,7 +83,7 @@ const ProjectDrawerTopBar: FC<ProjectDrawerTopBarProps> = ({
                 <AddItemModalContent
                     label={'New file'}
                     onSubmit={(name) => {
-                        void handleCreate(name, 'file')
+                        void handleSubmit(name, 'file')
                     }}
                     onClose={() => {
                         setIsFileCreationModalOpen(false)

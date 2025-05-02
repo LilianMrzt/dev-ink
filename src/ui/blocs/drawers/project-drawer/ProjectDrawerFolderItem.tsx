@@ -105,6 +105,7 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
                 cursorPosition={cursorPosition}
                 setIsVisible={setIsFloatingMenuVisible}
                 isVisible={isFloatingMenuVisible}
+                activeItem={activeItem}
             />
         </div>
     )

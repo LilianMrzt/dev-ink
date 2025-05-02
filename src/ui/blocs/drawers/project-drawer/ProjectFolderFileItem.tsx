@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent, useState } from 'react'
 import Text from '@components/text/Text'
 import './project-drawer-file-item.css'
 import { ProjectFolderFileItemProps } from '@interfaces/ui/blocs/drawers/project-drawer/ProjectFolderFileItemProps'
@@ -7,6 +7,7 @@ import { FileIcon } from '@resources/Icons'
 import { useTheme } from '@hooks/ThemeContext'
 import { useEditor } from '@hooks/EditorContext'
 import { filesIconColor } from '@constants/filesIcons'
+import ProjectDrawerFloatingMenu from '@ui/blocs/menus/ProjectDrawerFloatingMenu'
 
 const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
     item,
@@ -18,6 +19,19 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
     const {
         openFile
     } = useEditor()
+
+    const [isFloatingMenuVisible, setIsFloatingMenuVisible] = useState(false)
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+
+    /**
+     * Gestion du click droit sur l'élément
+     * @param e
+     */
+    const handleRightClick = (e: MouseEvent) => {
+        e.preventDefault()
+        setCursorPosition({ x: e.clientX, y: e.clientY })
+        setIsFloatingMenuVisible(true)
+    }
 
     const isActive = activeItem?.path === item.path
 
@@ -44,7 +58,10 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
                     })
                 }
             }}
-
+            onContextMenu={(event) => {
+                setActiveItem(item)
+                handleRightClick(event)
+            }}
         >
             <Icon
                 color={filesIconColor(item.name, theme)}
@@ -54,6 +71,12 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
             <Text>
                 {item.name}
             </Text>
+            <ProjectDrawerFloatingMenu
+                cursorPosition={cursorPosition}
+                setIsVisible={setIsFloatingMenuVisible}
+                isVisible={isFloatingMenuVisible}
+                activeItem={activeItem}
+            />
         </div>
     )
 }

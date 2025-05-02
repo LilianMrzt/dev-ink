@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import ResizableDrawer from '@ui/blocs/side-menu/ResizableDrawer'
 import { useFolder } from '@hooks/FolderContext'
 import ProjectDrawerFolderItem from '@ui/blocs/drawers/project-drawer/ProjectDrawerFolderItem'
@@ -10,6 +10,15 @@ const ProjectDrawer = (): ReactNode => {
     const { openFolder } = useFolder()
 
     const [activeItem, setActiveItem] = useState<FolderEntry | null>(null)
+
+    /**
+     * Lors de l'ouverture, le premier dossier est défini comme activeItem
+     */
+    useEffect(() => {
+        if (openFolder?.structure.length && !activeItem) {
+            setActiveItem(openFolder.structure[0])
+        }
+    }, [openFolder, activeItem])
 
     if (!openFolder) {
         return null
