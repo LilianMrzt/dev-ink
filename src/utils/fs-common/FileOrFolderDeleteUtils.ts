@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { FolderEntry } from '@interfaces/types/FolderEntry'
 
-export const handleDelete = async (
+export const handleDeleteElement = async (
     path: string,
     setOpenFolder: Dispatch<SetStateAction<{ folderPath: string; structure: FolderEntry[] } | null>>
 ) => {

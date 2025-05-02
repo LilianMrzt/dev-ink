@@ -32,5 +32,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     deletePath: (path: string) => {
         return ipcRenderer.invoke('delete-path', path)
+    },
+    refactorPathReferences: (rootDir: string, oldPath: string, newPath: string) => {
+        return ipcRenderer.invoke('refactor-path-references', rootDir, oldPath, newPath)
     }
 })

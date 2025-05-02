@@ -5,7 +5,6 @@ import ProjectDrawerFolderItem from '@ui/blocs/drawers/project-drawer/ProjectDra
 import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolderFileItem'
 import ProjectDrawerTopBar from '@ui/blocs/drawers/project-drawer/ProjectDrawerTopBar'
 import { FolderEntry } from '@interfaces/types/FolderEntry'
-import { handleDelete } from '@utils/fs-common/FileOrFolderDeleteUtils'
 import Modal from '@components/layout/Modal'
 import DeleteItemModalContent from '@ui/blocs/modals/DeleteItemModalContent'
 
@@ -82,16 +81,8 @@ const ProjectDrawer = (): ReactNode => {
                 >
                     <DeleteItemModalContent
                         activeItem={activeItem}
-                        onDelete={() => {
-                            if (openFolder?.structure.length &&
-                                openFolder.structure[0] !== activeItem) {
-                                void handleDelete(activeItem.path, setOpenFolder)
-                                setActiveItem(null)
-                            }
-                        }}
-                        onClose={() => {
-                            setIsDeleteModalOpen(false)
-                        }}
+                        setActiveItem={setActiveItem}
+                        setIsModalOpen={setIsDeleteModalOpen}
                     />
                 </Modal>
             )}

@@ -1,12 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react'
 import Text from '@components/text/Text'
 import './add-item-modal-content.css'
-
-export interface AddItemModalContentProps {
-    label: string
-    onSubmit: (name: string) => void
-    onClose: () => void
-}
+import { AddItemModalContentProps } from '@interfaces/ui/blocs/modals/AddItemModalContentProps'
 
 const AddItemModalContent: FC<AddItemModalContentProps> = ({
     label,

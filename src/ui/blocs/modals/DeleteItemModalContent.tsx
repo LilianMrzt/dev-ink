@@ -1,20 +1,33 @@
 import React, { FC } from 'react'
 import './delete-item-modal-content.css'
 import Text from '@components/text/Text'
-import { FolderEntry } from '@interfaces/types/FolderEntry'
 import Button from '@components/buttons/Button'
-
-export interface DeleteItemModalContentProps {
-    activeItem: FolderEntry
-    onDelete: () => void
-    onClose: () => void
-}
+import { useFolder } from '@hooks/FolderContext'
+import { handleDeleteElement } from '@utils/fs-common/FileOrFolderDeleteUtils'
+import { DeleteItemModalContentProps } from '@interfaces/ui/blocs/modals/DeleteItemModalContentProps'
 
 const DeleteItemModalContent: FC<DeleteItemModalContentProps> = ({
     activeItem,
-    onClose,
-    onDelete
+    setActiveItem,
+    setIsModalOpen
 }) => {
+    const {
+        openFolder,
+        setOpenFolder
+    } = useFolder()
+
+    const handleDelete = () => {
+        if (openFolder?.structure.length &&
+            openFolder.structure[0] !== activeItem) {
+            void handleDeleteElement(activeItem.path, setOpenFolder)
+            setActiveItem(null)
+        }
+    }
+
+    const handleClose = () => {
+        setIsModalOpen(false)
+    }
+
     return (
         <div
             className={'delete-item-modal-content'}
@@ -63,13 +76,13 @@ const DeleteItemModalContent: FC<DeleteItemModalContentProps> = ({
                 <Button
                     label={'Delete'}
                     onClick={() => {
-                        onDelete()
-                        onClose()
+                        handleDelete()
+                        handleClose()
                     }}
                 />
                 <Button
                     label={'Cancel'}
-                    onClick={onClose}
+                    onClick={handleClose}
                     backgroundColor={'transparent'}
                 />
             </div>
