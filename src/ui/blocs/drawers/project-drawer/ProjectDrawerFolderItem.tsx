@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, MouseEvent } from 'react'
 import Text from '@components/text/Text'
 import Icon from '@components/resources/Icon'
 import { ChevronDownIcon, ChevronRightIcon, FolderIcon } from '@resources/Icons'
@@ -6,6 +6,7 @@ import { useTheme } from '@hooks/ThemeContext'
 import './project-drawer-folder-item.css'
 import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolderFileItem'
 import { ProjectDrawerFolderItemProps } from '@interfaces/ui/blocs/drawers/project-drawer/ProjectDrawerFolderItemProps'
+import ProjectDrawerFloatingMenu from '@ui/blocs/menus/ProjectDrawerFloatingMenu'
 
 const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
     item,
@@ -18,6 +19,18 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
     const isActive = activeItem?.path === item.path
 
     const [showChildren, setShowChildren] = useState(false)
+    const [isFloatingMenuVisible, setIsFloatingMenuVisible] = useState(false)
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+
+    /**
+     * Gestion du click droit sur l'élément
+     * @param e
+     */
+    const handleRightClick = (e: MouseEvent) => {
+        e.preventDefault()
+        setCursorPosition({ x: e.clientX, y: e.clientY })
+        setIsFloatingMenuVisible(true)
+    }
 
     return (
         <div>
@@ -31,6 +44,10 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
                 }}
                 onDoubleClick={() => {
                     setShowChildren(!showChildren)
+                }}
+                onContextMenu={(event) => {
+                    setActiveItem(item)
+                    handleRightClick(event)
                 }}
             >
                 <button
@@ -84,6 +101,11 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
                     })}
                 </div>
             )}
+            <ProjectDrawerFloatingMenu
+                cursorPosition={cursorPosition}
+                setIsVisible={setIsFloatingMenuVisible}
+                isVisible={isFloatingMenuVisible}
+            />
         </div>
     )
 }

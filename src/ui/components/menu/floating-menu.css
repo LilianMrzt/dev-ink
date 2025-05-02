@@ -1,0 +1,11 @@
+.floating-menu {
+    position: fixed;
+    background-color: var(--primary);
+    border: 1px solid var(--outline);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+    max-width: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
