@@ -7,6 +7,8 @@ import './project-drawer-folder-item.css'
 import ProjectFolderFileItem from '@ui/blocs/drawers/project-drawer/ProjectFolderFileItem'
 import { ProjectDrawerFolderItemProps } from '@interfaces/ui/blocs/drawers/project-drawer/ProjectDrawerFolderItemProps'
 import ProjectDrawerFloatingMenu from '@ui/blocs/menus/ProjectDrawerFloatingMenu'
+import { useDragDropContext } from '@hooks/DragDropContext'
+import { useFolder } from '@hooks/FolderContext'
 
 const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
     item,
@@ -14,13 +16,53 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
     setActiveItem,
     depth = 0
 }) => {
-    const { theme } = useTheme()
+    const {
+        theme
+    } = useTheme()
+
+    const {
+        setOpenFolder
+    } = useFolder()
+
+    const {
+        draggedItemPath,
+        setDraggedItemPath,
+        hoveredPath,
+        setHoveredPath
+    } = useDragDropContext()
 
     const isActive = activeItem?.path === item.path
 
     const [showChildren, setShowChildren] = useState(false)
     const [isFloatingMenuVisible, setIsFloatingMenuVisible] = useState(false)
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+
+    const isHovered = hoveredPath === item.path
+    const canDropItem = draggedItemPath !== item.path &&
+        !draggedItemPath?.startsWith(item.path + '/') &&
+        item.isDirectory
+
+    /**
+     * Gestion du drop d'un element sur un dossier
+     */
+    const handleDrop = async () => {
+
+        if (!draggedItemPath || !canDropItem) {
+            return
+        }
+
+        const response = await window.electronAPI?.movePath(draggedItemPath, item.path)
+
+        if (response?.newPath) {
+            const refreshed = await window.electronAPI?.getLastOpenedFolder()
+            if (refreshed) {
+                setOpenFolder(refreshed)
+            }
+        }
+
+        setHoveredPath(null)
+        setDraggedItemPath(null)
+    }
 
     /**
      * Gestion du click droit sur l'élément
@@ -37,9 +79,10 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
             <div
                 className={`project-drawer-folder-item ${isActive ? 'active' : ''}`}
                 style={{
-                    paddingLeft: depth * 20
+                    paddingLeft: depth * 20,
+                    backgroundColor: isHovered ? theme.tertiary : undefined
                 }}
-                onClick={() => {
+                onMouseDown={() => {
                     setActiveItem(item)
                 }}
                 onDoubleClick={() => {
@@ -49,6 +92,20 @@ const ProjectDrawerFolderItem: FC<ProjectDrawerFolderItemProps> = ({
                     setActiveItem(item)
                     handleRightClick(event)
                 }}
+                onDragStart={() => {
+                    setDraggedItemPath(item.path)
+                }}
+                onDragOver={(e) => {
+                    e.preventDefault()
+                    if (draggedItemPath && canDropItem) {
+                        setHoveredPath(item.path)
+                    }
+                }}
+                onDragLeave={() => {
+                    setHoveredPath(null)
+                }}
+                onDrop={handleDrop}
+                draggable
             >
                 <button
                     className={'project-drawer-folder-item-icon-button'}

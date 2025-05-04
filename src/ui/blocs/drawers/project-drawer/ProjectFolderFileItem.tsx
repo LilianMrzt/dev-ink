@@ -8,6 +8,7 @@ import { useTheme } from '@hooks/ThemeContext'
 import { useEditor } from '@hooks/EditorContext'
 import { filesIconColor } from '@constants/filesIcons'
 import ProjectDrawerFloatingMenu from '@ui/blocs/menus/ProjectDrawerFloatingMenu'
+import { useDragDropContext } from '@hooks/DragDropContext'
 
 const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
     item,
@@ -16,6 +17,11 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
     depth = 0
 }) => {
     const { theme } = useTheme()
+
+    const {
+        setDraggedItemPath
+    } = useDragDropContext()
+
     const {
         openFile
     } = useEditor()
@@ -41,8 +47,14 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
             style={{
                 paddingLeft: (depth + 1) * 20
             }}
-            onClick={() => {
+            onMouseDown={() => {
                 setActiveItem(item)
+            }}
+            onDragStart={() => {
+                setDraggedItemPath(item.path)
+            }}
+            onDragEnd={() => {
+                setDraggedItemPath(null)
             }}
             onDoubleClick={async () => {
                 setActiveItem(item)
@@ -62,6 +74,7 @@ const ProjectFolderFileItem: FC<ProjectFolderFileItemProps> = ({
                 setActiveItem(item)
                 handleRightClick(event)
             }}
+            draggable
         >
             <Icon
                 color={filesIconColor(item.name, theme)}

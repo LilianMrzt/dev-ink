@@ -15,7 +15,8 @@ declare global {
             createFile: (filePath: string) => Promise<{ success: boolean; error?: string }>,
             createFolder: (folderPath: string) => Promise<{ success: boolean; error?: string }>,
             deletePath: (targetPath: string) => Promise<{ success: boolean; error?: string }>,
-            refactorPathReferences: (rootDir: string, oldPath: string, newPath: string) => Promise<{ success: boolean, updatedFiles?: string[], error?: string }>
+            refactorPathReferences: (rootDir: string, oldPath: string, newPath: string) => Promise<{ success: boolean, updatedFiles?: string[], error?: string }>,
+            movePath: (sourcePath: string, destDir: string) => Promise<{ oldPath: string; newPath: string; success?: boolean; error?: string }>
         }
     }
 }

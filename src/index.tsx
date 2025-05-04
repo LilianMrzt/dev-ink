@@ -6,6 +6,7 @@ import { ThemeProvider } from '@hooks/ThemeContext'
 import '@styles/prism-custom-theme.css'
 import { FolderProvider } from '@hooks/FolderContext'
 import { EditorProvider } from '@hooks/EditorContext'
+import { DragDropProvider } from '@hooks/DragDropContext'
 
 const root = ReactDOM.createRoot(
     document.getElementById('root')!
@@ -16,7 +17,9 @@ root.render(
         <FolderProvider>
             <EditorProvider>
                 <ThemeProvider>
-                    <App />
+                    <DragDropProvider>
+                        <App />
+                    </DragDropProvider>
                 </ThemeProvider>
             </EditorProvider>
         </FolderProvider>
