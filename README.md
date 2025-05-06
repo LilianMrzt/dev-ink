@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# DevInk - Code Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**DevInk** est un éditeur de code moderne et léger, conçu avec React, TypeScript et Electron. Il permet d’éditer du code localement avec mise en évidence syntaxique, historique intelligent, navigation multi-fichiers, et une interface responsive. Ce projet a pour but d’explorer la création d’applications desktop avec des technologies web modernes.
 
-## Available Scripts
+[Voir le code sur GitHub](https://github.com/LilianMrzt/dev-ink)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Détails techniques
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Ce projet a été développé avec les technologies et concepts suivants :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React 18** — pour la construction de l’interface
+- **TypeScript** — pour un typage statique robuste
+- **Electron** — pour la création et l'intégration d'une application de bureau avec React
+- **PrismJs** — pour un surlignage synthaxique du code
+- **React-window** — pour un rendu plus performant
+- **ESLint** — pour assurer la qualité du code
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Statut
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> Ce projet est **en cours de développement** et ne représente pas la qualité finale d’un éditeur de code. Il a été développé à des fins d’apprentissage autour d’Electron et de React pour le desktop.
+>
+> Des fonctionnalités à venir incluent :
+> - Terminal intégré
+> - Refactorisation de code
+> - Intégration avec Git
+> - Auto-complétion
+> - Support de plus de langages
+> - Recherche globale
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Fonctionnalités
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Édition de code avec surlignage syntaxique (support de plusieurs langages)
+- Système d'historique intelligent (annuler / refaire)
+- Navigation multi-fichiers avec onglets
+- Numérotation des lignes synchronisée
+- Lecture / écriture de fichiers locaux via Electron
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Installation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Pré-requis
 
-## Learn More
+- Node.js ≥ 18.x
+- Yarn ≥ 1.22
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Étapes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Cloner le dépôt :**
+```bash
+git clone https://github.com/LilianMrzt/dev-ink.git
+cd dev-ink
+```
 
-### Code Splitting
+2. **Installer les dépendances :**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Si vous n’avez pas Yarn, installez-le avec :
+```bash
+npm install --global yarn
+```
 
-### Analyzing the Bundle Size
+Pour installer les dépendances:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+yarn install
+```
 
-### Making a Progressive Web App
+3. **Lancer le projet localement :**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Lors du premier lanccement ou de après la modification de modules relatifs à Electron, il faut rebuild electron:
+```bash
+yarn build:electron
+```
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Puis, pour lancer le projet le projet sur une application en local:
+```bash
+yarn desktop:dev
+```
